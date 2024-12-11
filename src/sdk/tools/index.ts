@@ -1,7 +1,17 @@
+import { solanaWalletTools } from "./solana-wallet";
 import { solanaWalletGenerateKeypairTool } from "./solana-wallet/actions/generate-keypair";
 import { solanaWalletGetBalanceTool } from "./solana-wallet/actions/get-balance";
 import { solanaWalletGetMyPublicKeyTool } from "./solana-wallet/actions/get-my-publicKey";
 import { solanaWalletTransferTool } from "./solana-wallet/actions/transfer";
+
+
+export enum App {
+    SOLANA_WALLET,
+}
+
+export const appsMap = {
+    [App.SOLANA_WALLET]: solanaWalletTools,
+}
 
 
 export enum Action {

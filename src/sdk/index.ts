@@ -1,6 +1,7 @@
+import type { DynamicStructuredTool } from "langchain/tools";
 import { toolMessage, type IToolMessage } from "./helpers/common";
 import { getPublicKey } from "./helpers/getPublicKey";
-import { Action, actionsMap } from "./tools";
+import { Action, actionsMap, App, appsMap } from "./tools";
 import VityToolKitSDKContext from "./utils/vityToolKitContext";
 
 
@@ -11,6 +12,10 @@ export class VityToolKit {
             VityToolKitSDKContext.privateKey = privateKey;
             VityToolKitSDKContext.publicKey = getPublicKey(privateKey);
         }
+    }
+
+    async getApps(apps: App[]) {
+        return apps.flatMap(app => appsMap[app]);
     }
 
     async getActions(actions: Action[]) {
