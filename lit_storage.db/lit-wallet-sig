@@ -1,6 +1,0 @@
-{
-  "sig": "0x146736210c5d1a7d27c7d0402dfa295da89c56d5c940cee815ce40b3fd55082f5bdc63681091341d2a4c8de711e8c1e91772cfdf90ca8afc02b0e420be15d3281c",
-  "derivedVia": "web3.eth.personal.sign",
-  "signedMessage": "localhost wants you to sign in with your Ethereum account:\n0x17Ad46C3C8AF35c79995014173Bf263DD14d0A22\n\nThis is a test statement.  You can put anything you want here. I further authorize the stated URI to perform the following actions on my behalf: (1) 'Threshold': 'Decryption' for 'lit-accesscontrolcondition://*'.\n\nURI: lit:session:d8a8b15495e6fc78412b005e9c5670a81456cf01598a779f9af3ee9c53551167\nVersion: 1\nChain ID: 1\nNonce: 0xa08f73cdb61bd0d83adba875b1c4312f20228e9a3c0cd808c82ef2675fe4badc\nIssued At: 2024-12-09T21:01:58.799Z\nExpiration Time: 2024-12-10T21:01:58.795Z\nResources:\n- urn:recap:eyJhdHQiOnsibGl0LWFjY2Vzc2NvbnRyb2xjb25kaXRpb246Ly8qIjp7IlRocmVzaG9sZC9EZWNyeXB0aW9uIjpbe31dfX0sInByZiI6W119",
-  "address": "0x17Ad46C3C8AF35c79995014173Bf263DD14d0A22"
-}

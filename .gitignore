@@ -175,4 +175,4 @@ dist
 .DS_Store
 
 # session stores
-lit_storage_db/
+lit_storage.db/
