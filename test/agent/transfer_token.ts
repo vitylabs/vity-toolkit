@@ -8,7 +8,7 @@ import { AgentExecutor } from "langchain/agents";
 const model = new ChatOpenAI({ model: "gpt-4o" });
 const toolKit = new VityToolKit("<private-key>");
 
-const tools = await toolKit.getActions([Action.SOLANA_WALLET_TRANSFER, Action.SOLANA_WALLET_GET_BALANCE, Action.SOLANA_WALLET_GET_MY_PUBLIC_KEY]);
+const tools = await toolKit.getTools({ actions: [Action.SOLANA_WALLET_TRANSFER, Action.SOLANA_WALLET_GET_BALANCE, Action.SOLANA_WALLET_GET_MY_PUBLIC_KEY] });
 const prompt = ChatPromptTemplate.fromMessages([
     ["system", "You are a helpful assistant"],
     ["placeholder", "{chat_history}"],

@@ -1,16 +1,19 @@
-import { solanaWalletTools } from "./solana-wallet";
+import { SolanaWalletTool } from "./solana-wallet";
 import { solanaWalletGenerateKeypairTool } from "./solana-wallet/actions/generate-keypair";
 import { solanaWalletGetBalanceTool } from "./solana-wallet/actions/get-balance";
 import { solanaWalletGetMyPublicKeyTool } from "./solana-wallet/actions/get-my-publicKey";
 import { solanaWalletTransferTool } from "./solana-wallet/actions/transfer";
+import { TwitterTool } from "./twitter";
 
 
 export enum App {
     SOLANA_WALLET,
+    TWITTER
 }
 
-export const appsMap = {
-    [App.SOLANA_WALLET]: solanaWalletTools,
+export const appsMap= {
+    [App.SOLANA_WALLET]: new SolanaWalletTool(),
+    [App.TWITTER]: new TwitterTool(),
 }
 
 

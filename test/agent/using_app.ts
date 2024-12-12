@@ -9,7 +9,7 @@ import { App } from "../../src/sdk/tools";
 const model = new ChatOpenAI({ model: "gpt-4o" });
 const toolKit = new VityToolKit();
 
-const tools = await toolKit.getApps([App.SOLANA_WALLET]);
+const tools = await toolKit.getTools({ apps: [App.SOLANA_WALLET] });
 const prompt = ChatPromptTemplate.fromMessages([
     ["system", "You are a helpful assistant"],
     ["placeholder", "{chat_history}"],

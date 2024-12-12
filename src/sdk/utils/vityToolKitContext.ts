@@ -6,8 +6,10 @@
     Warning: Can cause problems if there are multiple instances of the SDK running in the same process.
 */
 class VityToolKitSDKContext {
-    static privateKey?: string;
-    static publicKey?: string;
+    static appPrivateKey?: string;
+    static appPublicKey?: string;
+    static userPrivateKey?: string;
+    static userPublicKey?: string;
 }
 
 export default VityToolKitSDKContext;

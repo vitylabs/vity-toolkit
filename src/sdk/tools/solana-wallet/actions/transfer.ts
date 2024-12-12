@@ -13,8 +13,8 @@ const solanaWalletTransfer = async (inputParams: { to: string, amount: number, t
         let connection: Connection;
         let tx: string;
 
-        const privateKey = VityToolKitSDKContext.privateKey;
-        const publicKey = VityToolKitSDKContext.publicKey;
+        const privateKey = VityToolKitSDKContext.userPrivateKey;
+        const publicKey = VityToolKitSDKContext.userPublicKey;
 
         // validation
         if (!privateKey || !publicKey) {

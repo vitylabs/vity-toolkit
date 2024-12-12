@@ -4,11 +4,17 @@ import { solanaWalletGetMyPublicKeyTool } from "./actions/get-my-publicKey";
 import { solanaWalletTransferTool } from "./actions/transfer";
 
 
-export const solanaWalletTools = [
-    solanaWalletGenerateKeypairTool,
-    solanaWalletGetBalanceTool,
-    solanaWalletGetMyPublicKeyTool,
-    solanaWalletTransferTool,
-]
+export class SolanaWalletTool {
+
+    getTools() {
+        return [
+            solanaWalletGenerateKeypairTool,
+            solanaWalletGetBalanceTool,
+            solanaWalletGetMyPublicKeyTool,
+            solanaWalletTransferTool,
+        ]
+    }
+
+}
 
 

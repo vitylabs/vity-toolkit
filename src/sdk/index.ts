@@ -1,4 +1,3 @@
-import type { DynamicStructuredTool } from "langchain/tools";
 import { toolMessage, type IToolMessage } from "./helpers/common";
 import { getPublicKey } from "./helpers/getPublicKey";
 import { Action, actionsMap, App, appsMap } from "./tools";
@@ -7,22 +6,34 @@ import VityToolKitSDKContext from "./utils/vityToolKitContext";
 
 export class VityToolKit {
 
-    constructor(privateKey?: string, chain: string = "solana") {
-        if (privateKey) {
-            VityToolKitSDKContext.privateKey = privateKey;
-            VityToolKitSDKContext.publicKey = getPublicKey(privateKey);
+    constructor(userPrivateKey?: string, appPrivateKey?: string) {
+        if (userPrivateKey) {
+            VityToolKitSDKContext.userPrivateKey = userPrivateKey;
+            VityToolKitSDKContext.userPublicKey = getPublicKey(userPrivateKey);
+        }
+
+        if (appPrivateKey) {
+            VityToolKitSDKContext.appPrivateKey = appPrivateKey;
+            VityToolKitSDKContext.appPublicKey = getPublicKey(appPrivateKey);
         }
     }
 
-    async getApps(apps: App[]) {
-        return apps.flatMap(app => appsMap[app]);
+    private async getApps(apps: App[]) {
+        return apps.flatMap(app => appsMap[app].getTools());
     }
 
-    async getActions(actions: Action[]) {
+    private async getActions(actions: Action[]) {
         return actions.map(action => actionsMap[action]);
     }
 
-    async executeAction(action: Action, innputParams: object = {}): Promise<IToolMessage> {
+    async getTools({ apps, actions }: { apps?: App[], actions?: Action[] }) {
+        const appTools = apps ? await this.getApps(apps) : [];
+        const actionTools = actions ? await this.getActions(actions) : [];
+
+        return [...appTools, ...actionTools];
+    }    
+
+    async executeAction({ action, innputParams = {} }: { action: Action, innputParams?: object }): Promise<IToolMessage> {
         try {
             const result = await actionsMap[action].invoke(innputParams);
             return JSON.parse(result) as IToolMessage;
@@ -36,6 +47,14 @@ export class VityToolKit {
 
             return JSON.parse(message) as IToolMessage;
         }
+    }
+
+    async initiateAppConnection(app: App, input: object) {
+
+    }
+
+    async getExpectedParamsForUser(app: App) {
+        
     }
 
 }
