@@ -6,16 +6,34 @@ import { solanaWalletTransferTool } from "./solana-wallet/actions/transfer";
 import { TwitterTool } from "./twitter";
 
 
+//  A P P S
+
 export enum App {
     SOLANA_WALLET,
     TWITTER
 }
 
-export const appsMap= {
+export const appsMap = {
     [App.SOLANA_WALLET]: new SolanaWalletTool(),
     [App.TWITTER]: new TwitterTool(),
 }
 
+// Integrable apps
+
+export type IntegrableApps = Extract<
+    App,
+    App.TWITTER
+>;
+
+// Connectable apps
+
+export type ConnectableApps = Extract<
+    App,
+    App.TWITTER
+>;
+
+
+// A C T I O N S
 
 export enum Action {
     SOLANA_WALLET_GENERATE_KEYPAIR,

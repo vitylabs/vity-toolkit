@@ -1,24 +1,23 @@
+import { Lit } from "../../utils/lit-protocol";
 import VityToolKitSDKContext from "../../utils/vityToolKitContext";
-
-
-interface expectedParamsForApp {
-    APP_KEY: string;
-    APP_SECRET: string;
-}
-
-interface expectedParamsForUser {
-    ACCESS_TOKEN: string;
-    ACCESS_SECRET: string;
-}
 
 
 export class TwitterTool {
     private appPrivateKey: string | undefined;
     private userPrivateKey: string | undefined;
+    private appLit: Lit | undefined;
+    private userLit: Lit | undefined;
 
     constructor() {
         this.appPrivateKey = VityToolKitSDKContext.appPrivateKey;
         this.userPrivateKey = VityToolKitSDKContext.userPrivateKey;
+
+        if (this.appPrivateKey && this.userPrivateKey) {
+            this.appLit = new Lit(this.appPrivateKey);
+            this.userLit = new Lit(this.userPrivateKey);
+        } else {
+            throw new Error("App and user private keys are required to use this tool");
+        }
     }
 
     getTools() {
@@ -27,32 +26,32 @@ export class TwitterTool {
         ]
     }
 
-    getExpectedParamsForApp(): expectedParamsForApp {
+    getExpectedParamsForIntegration() {
         return {
-            APP_KEY: "string",
-            APP_SECRET: "string"
+            APP_KEY: "",
+            APP_SECRET: ""
         }
     }
 
-    getExpectedParamsForUser(): expectedParamsForUser {
+    getExpectedParamsForConnection() {
         return {
-            ACCESS_TOKEN: "string",
-            ACCESS_SECRET: "string"
+            ACCESS_TOKEN: "",
+            ACCESS_SECRET: ""
         }
     }
 
-    async getAppConnectionForApp(app: string) {
+    async isAppIntegrated() {
     }
 
-    async getAppConnectionForUser(app: string) {
+    async isAppConnected() {
     }
 
-    async initiateAppIntegration({ app, input }: { app: string, input: expectedParamsForApp }) { // for the developer/company 
-        console.log(`Initiating connection to ${app} with input: ${input}`);
+    async initiateAppIntegration(authData: object) { // for the developer/company
+        console.log("Integration authData", authData);
     }
 
-    async initiateAppConnectionForUser({ app, input }: { app: string, input: expectedParamsForUser }) { // for the user (after the developer/company has initiated the connection)
-        console.log(`Initiating connection to ${app} with input: ${input}`);
+    async initiateAppConnection(authData: object) { // for the user
+        console.log("Connection authData", authData);
     }
 
 }
