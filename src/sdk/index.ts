@@ -49,6 +49,14 @@ export class VityToolKit {
         }
     }
 
+    async getIntegration(app: IntegrableApps) {
+        
+    }
+
+    async getConnection(app: ConnectableApps) {
+        
+    }
+
     async initiateAppIntegration({ app, authData }: { app: IntegrableApps, authData: object }) {
         return await appsMap[app].initiateAppIntegration(authData);
     }

@@ -40,10 +40,10 @@ export class TwitterTool {
         }
     }
 
-    async isAppIntegrated() {
+    async getIntegration() {
     }
 
-    async isAppConnected() {
+    async getConnection() {
     }
 
     async initiateAppIntegration(authData: object) { // for the developer/company
