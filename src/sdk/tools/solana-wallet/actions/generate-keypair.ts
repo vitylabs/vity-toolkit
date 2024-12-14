@@ -1,4 +1,4 @@
-import { createTool } from "../../../helpers/createTool";
+import { createAction } from "../../../helpers/createTool";
 import { toolMessage } from "../../../helpers/common";
 import { Keypair } from "@solana/web3.js"
 import { z } from "zod";
@@ -19,7 +19,7 @@ const solanaWalletGenerateKeypair = async (): Promise<string> => {
 }
 
 
-export const solanaWalletGenerateKeypairTool = createTool({
+export const solanaWalletGenerateKeypairTool = createAction({
     name: "solanaWalletGenerateKeypairTool",
     description: "Generate a new Solana keypair",
     inputParams: z.object({}),

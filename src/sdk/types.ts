@@ -1,0 +1,7 @@
+
+
+export enum AuthType {
+  OAUTH = "OAUTH",
+  API_KEY = "API_KEY",
+  PASSWORD_BASED_AUTH = "PASSWORD_BASED_AUTH"
+}

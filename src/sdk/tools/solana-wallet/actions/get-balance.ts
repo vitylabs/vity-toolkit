@@ -1,4 +1,4 @@
-import { createTool } from "../../../helpers/createTool";
+import { createAction } from "../../../helpers/createTool";
 import { toolMessage } from "../../../helpers/common";
 import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { z } from "zod";
@@ -71,7 +71,7 @@ const solanaWalletGetBalance = async (inputParams: { publicKey: string, tokenNam
 }
 
 
-export const solanaWalletGetBalanceTool = createTool({
+export const solanaWalletGetBalanceTool = createAction({
     name: "solanaWalletGetBalanceTool",
     description: "Retrieve the balance of a Solana account.",
     inputParams: z.object({

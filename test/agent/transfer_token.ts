@@ -6,7 +6,9 @@ import { AgentExecutor } from "langchain/agents";
 
 
 const model = new ChatOpenAI({ model: "gpt-4o" });
-const toolKit = new VityToolKit("<private-key>");
+const toolKit = new VityToolKit({
+    userPrivateKey: "<private_key>",
+});
 
 const tools = await toolKit.getTools({ actions: [Action.SOLANA_WALLET_TRANSFER, Action.SOLANA_WALLET_GET_BALANCE, Action.SOLANA_WALLET_GET_MY_PUBLIC_KEY] });
 const prompt = ChatPromptTemplate.fromMessages([

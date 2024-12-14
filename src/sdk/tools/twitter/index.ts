@@ -1,3 +1,5 @@
+import { connectionMessage, integrationMessage } from "../../helpers/common";
+import { AuthType } from "../../types";
 import { Lit } from "../../utils/lit-protocol";
 import VityToolKitSDKContext from "../../utils/vityToolKitContext";
 
@@ -9,6 +11,10 @@ export class TwitterTool {
     private userLit: Lit | undefined;
 
     constructor() {
+        if (!VityToolKitSDKContext) {
+            throw new Error('VityToolKit not initialized');
+        }
+
         this.appPrivateKey = VityToolKitSDKContext.appPrivateKey;
         this.userPrivateKey = VityToolKitSDKContext.userPrivateKey;
 
@@ -26,28 +32,46 @@ export class TwitterTool {
         ]
     }
 
-    getExpectedParamsForIntegration() {
-        return {
-            APP_KEY: "",
-            APP_SECRET: ""
-        }
+    getExpectedParamsForIntegration(type: AuthType) {
+        return integrationMessage({
+            success: false,
+            message: "Currently, we do not support integration for Twitter"
+        });
     }
 
-    getExpectedParamsForConnection() {
-        return {
-            ACCESS_TOKEN: "",
-            ACCESS_SECRET: ""
+    getExpectedParamsForConnection(type: AuthType) {
+        switch (type) {
+            case AuthType.OAUTH:
+                return connectionMessage({
+                    success: false,
+                    message: "Currently, we do not support OAuth for Twitter"
+                });
+            case AuthType.API_KEY:
+                return connectionMessage({
+                    success: false,
+                    message: "Currently, we do not support API Key for Twitter"
+                });
+            case AuthType.PASSWORD_BASED_AUTH:
+                return {
+                    USERNAME: "",
+                    PASSWORD: ""
+                }
         }
     }
 
     async getIntegration() {
+        return null;
     }
 
     async getConnection() {
+        return null;
     }
 
     async initiateAppIntegration(authData: object) { // for the developer/company
-        console.log("Integration authData", authData);
+        return integrationMessage({
+            success: false,
+            message: "Currently, we do not support integration for Twitter"
+        });
     }
 
     async initiateAppConnection(authData: object) { // for the user

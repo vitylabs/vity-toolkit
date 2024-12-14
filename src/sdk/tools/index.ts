@@ -14,8 +14,8 @@ export enum App {
 }
 
 export const appsMap = {
-    [App.SOLANA_WALLET]: new SolanaWalletTool(),
-    [App.TWITTER]: new TwitterTool(),
+    [App.SOLANA_WALLET]: SolanaWalletTool,
+    [App.TWITTER]: TwitterTool,
 }
 
 // Integrable apps

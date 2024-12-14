@@ -4,7 +4,7 @@ import VityToolKitSDKContext from "../../../utils/vityToolKitContext";
 import { getNetworkEndpoint, getTokenddress } from "../../../helpers/token";
 import { createTransferInstruction, getAssociatedTokenAddress, getMint, getOrCreateAssociatedTokenAccount, mintTo, transfer, transferChecked } from "@solana/spl-token";
 import { getKeypair } from "../../../helpers/getPublicKey";
-import { createTool } from "../../../helpers/createTool";
+import { createAction } from "../../../helpers/createTool";
 import { z } from "zod";
 
 
@@ -124,7 +124,7 @@ const solanaWalletTransfer = async (inputParams: { to: string, amount: number, t
 }
 
 
-export const solanaWalletTransferTool = createTool({
+export const solanaWalletTransferTool = createAction({
     name: "solanaWalletTransferTool",
     description: "Transfer Solana tokens to another account.",
     inputParams: z.object({

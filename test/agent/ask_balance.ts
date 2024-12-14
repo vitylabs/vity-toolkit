@@ -7,7 +7,7 @@ import { AgentExecutor } from "langchain/agents";
 
 const model = new ChatOpenAI({ model: "gpt-4o" });
 const toolKit = new VityToolKit();
-// const toolKit = new VityToolKit("3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv");
+// const toolKit = new VityToolKit({ userPrivateKey: "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv"});
 
 const tools = await toolKit.getTools({ actions: [Action.SOLANA_WALLET_GENERATE_KEYPAIR, Action.SOLANA_WALLET_GET_BALANCE, Action.SOLANA_WALLET_GET_MY_PUBLIC_KEY] });
 const prompt = ChatPromptTemplate.fromMessages([

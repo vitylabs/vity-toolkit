@@ -1,11 +1,15 @@
 import { z } from "zod";
-import { createTool } from "../../../helpers/createTool";
+import { createAction } from "../../../helpers/createTool";
 import { toolMessage } from "../../../helpers/common";
 import VityToolKitSDKContext from "../../../utils/vityToolKitContext";
 
 
 export const solanaWalletGetMyPublicKey = async (): Promise<string> => {
-    const publicKey = VityToolKitSDKContext.publicKey;
+    if (!VityToolKitSDKContext) {
+        throw new Error('VityToolKit not initialized');
+    }
+    
+    const publicKey = VityToolKitSDKContext.userPublicKey;
     if (!publicKey) {
         return toolMessage({
             success: false,
@@ -23,7 +27,7 @@ export const solanaWalletGetMyPublicKey = async (): Promise<string> => {
     });
 }
 
-export const solanaWalletGetMyPublicKeyTool = createTool({
+export const solanaWalletGetMyPublicKeyTool = createAction({
     name: "solanaWalletGetMyPublicKeyTool",
     description: "Retrieve the balance of a Solana account.",
     inputParams: z.object({}),

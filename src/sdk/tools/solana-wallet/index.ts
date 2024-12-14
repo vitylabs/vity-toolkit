@@ -6,6 +6,9 @@ import { solanaWalletTransferTool } from "./actions/transfer";
 
 export class SolanaWalletTool {
 
+    constructor() {
+    }
+
     getTools() {
         return [
             solanaWalletGenerateKeypairTool,

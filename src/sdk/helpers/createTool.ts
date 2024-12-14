@@ -12,7 +12,7 @@ type ToolConfig = {
 };
 
 
-export function createTool(config: ToolConfig) {
+export function createAction(config: ToolConfig) {
   const { name, description, inputParams, execute, isDynamic = false } = config;
 
   if (isDynamic) {

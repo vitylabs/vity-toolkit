@@ -1,12 +1,13 @@
 import { toolMessage, type IToolMessage } from "./helpers/common";
 import { getPublicKey } from "./helpers/getPublicKey";
-import { Action, actionsMap, App, appsMap, type ConnectableApps, type IntegrableApps } from "./tools";
 import VityToolKitSDKContext from "./utils/vityToolKitContext";
+import { Action, actionsMap, App, appsMap, type ConnectableApps, type IntegrableApps } from "./tools";
+import type { AuthType } from "./types";
 
 
 export class VityToolKit {
 
-    constructor(userPrivateKey?: string, appPrivateKey?: string) {
+    constructor({ userPrivateKey, appPrivateKey }: { userPrivateKey?: string, appPrivateKey?: string } = {}) {
         if (userPrivateKey) {
             VityToolKitSDKContext.userPrivateKey = userPrivateKey;
             VityToolKitSDKContext.userPublicKey = getPublicKey(userPrivateKey);
@@ -19,7 +20,7 @@ export class VityToolKit {
     }
 
     private getApps(apps: App[]) {
-        return apps.flatMap(app => appsMap[app].getTools());
+        return apps.flatMap(app => new appsMap[app]().getTools());
     }
 
     private getActions(actions: Action[]) {
@@ -54,23 +55,23 @@ export class VityToolKit {
     }
 
     async getConnection(app: ConnectableApps) {
-        
+
     }
 
     async initiateAppIntegration({ app, authData }: { app: IntegrableApps, authData: object }) {
-        return await appsMap[app].initiateAppIntegration(authData);
+        return await new appsMap[app]().initiateAppIntegration(authData);
     }
 
     async initiateAppConnection({ app, authData }: { app: ConnectableApps, authData: object }) {
-        return await appsMap[app].initiateAppConnection(authData);
+        return await new appsMap[app]().initiateAppConnection(authData);
     }
 
-    getExpectedParamsForIntegration(app: IntegrableApps) {
-        return appsMap[app].getExpectedParamsForIntegration();
+    getExpectedParamsForIntegration({ app, type }: { app: IntegrableApps, type: AuthType }) {
+        return new appsMap[app]().getExpectedParamsForIntegration(type);
     }
 
-    getExpectedParamsForConnection(app: ConnectableApps) {
-        return appsMap[app].getExpectedParamsForConnection();
+    getExpectedParamsForConnection({ app, type }: { app: ConnectableApps, type: AuthType }) {
+        return new appsMap[app]().getExpectedParamsForConnection(type);
     }
 
 }
