@@ -24,6 +24,7 @@
     "langchain": "^0.3.6",
     "node-localstorage": "^3.0.5",
     "openai": "^4.76.0",
+    "twitter-api-v2": "^1.18.2",
     "zod": "^3.24.0"
   }
 }

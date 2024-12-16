@@ -50,25 +50,25 @@ export class VityToolKit {
         }
     }
 
-    async getIntegration(app: IntegrableApps) {
+    // async getIntegration(app: IntegrableApps) {
         
-    }
+    // }
 
     async getConnection(app: ConnectableApps) {
 
     }
 
-    async initiateAppIntegration({ app, authData }: { app: IntegrableApps, authData: object }) {
-        return await new appsMap[app]().initiateAppIntegration(authData);
-    }
+    // async initiateAppIntegration({ app, authData }: { app: IntegrableApps, authData: object }) {
+    //     return await new appsMap[app]().initiateAppIntegration(authData);
+    // }
 
     async initiateAppConnection({ app, authData }: { app: ConnectableApps, authData: object }) {
         return await new appsMap[app]().initiateAppConnection(authData);
     }
 
-    getExpectedParamsForIntegration({ app, type }: { app: IntegrableApps, type: AuthType }) {
-        return new appsMap[app]().getExpectedParamsForIntegration(type);
-    }
+    // getExpectedParamsForIntegration({ app, type }: { app: IntegrableApps, type: AuthType }) {
+    //     return new appsMap[app]().getExpectedParamsForIntegration(type);
+    // }
 
     getExpectedParamsForConnection({ app, type }: { app: ConnectableApps, type: AuthType }) {
         return new appsMap[app]().getExpectedParamsForConnection(type);
