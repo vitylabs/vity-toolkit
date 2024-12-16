@@ -69,8 +69,8 @@ export class TwitterTool {
             this.userType = "user";
         }
 
-        if (!this.userPrivateKey) { // User private key is always required
-            throw new Error("User private key is required to use this tool");
+        if (!this.userPrivateKey) { // @TODO: User private key isn't require (for now)
+            // throw new Error("User private key is required to use this tool");
         } else {
             this.userLit = new Lit(this.userPrivateKey);
         }
@@ -81,7 +81,7 @@ export class TwitterTool {
             appKey: process.env.TWITTER_API_KEY as string,
             appSecret: process.env.TWITTER_API_SECRET as string,
             accessToken: process.env.TWITTER_ACCESS_TOKEN as string,
-            accessSecret: process.env.TWITTER_ACCESS_SECRET as string,
+            accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET as string,
         });
 
         this.roClient = this.client.readOnly;

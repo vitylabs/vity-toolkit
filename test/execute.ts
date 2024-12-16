@@ -4,7 +4,12 @@ import { Action } from "../src/sdk/tools";
 
 const toolKit = new VityToolKit();
 
-const result = await toolKit.executeAction({ action: Action.TWITTER_GET_USER_BY_USERNAME, inputParams: { username: "thatsmeadarsh" } });
+const result = await toolKit.executeAction({ 
+    action: Action.TWITTER_CREATE_TWEET, 
+    inputParams: {
+        statusOrPayload: "Hello world"
+    }
+});
 console.log(result.data);
 
 

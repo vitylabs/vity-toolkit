@@ -155,7 +155,7 @@ export const twitterCreateTweetTool = createAction({
     name: "twitterCreateTweetTool",
     description: "Create a new tweet.",
     inputParams: z.object({
-        statusOrPayload: z.union([z.string(), z.object({})]).describe("The tweet content or payload."),
+        statusOrPayload: z.union([z.string(), z.object({})]).describe("The tweet content or payload"),
         payload: z.object({}).optional().describe("Additional tweet payload.")
     }),
     execute: twitterCreateTweet,
