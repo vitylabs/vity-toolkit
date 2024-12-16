@@ -4,7 +4,7 @@ import VityToolKitSDKContext from "../../../utils/vityToolKitContext";
 import { getNetworkEndpoint, getTokenddress } from "../../../helpers/token";
 import { createTransferInstruction, getAssociatedTokenAddress, getMint, getOrCreateAssociatedTokenAccount, mintTo, transfer, transferChecked } from "@solana/spl-token";
 import { getKeypair } from "../../../helpers/getPublicKey";
-import { createAction } from "../../../helpers/createTool";
+import { createAction } from "../../../helpers/createAction";
 import { z } from "zod";
 
 

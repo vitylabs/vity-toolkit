@@ -1,4 +1,4 @@
-import { createAction } from "../../../helpers/createTool";
+import { createAction } from "../../../helpers/createAction";
 import { toolMessage } from "../../../helpers/common";
 import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { z } from "zod";

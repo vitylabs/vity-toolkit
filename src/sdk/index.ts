@@ -34,9 +34,9 @@ export class VityToolKit {
         return [...appTools, ...actionTools];
     }
 
-    async executeAction({ action, innputParams = {} }: { action: Action, innputParams?: object }): Promise<IToolMessage> {
+    async executeAction({ action, inputParams = {} }: { action: Action, inputParams?: object }): Promise<IToolMessage> {
         try {
-            const result = await actionsMap[action].invoke(innputParams);
+            const result = await actionsMap[action].invoke(inputParams);
             return JSON.parse(result) as IToolMessage;
         } catch (error: any) {
             console.error(error);

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createAction } from "../../../helpers/createTool";
+import { createAction } from "../../../helpers/createAction";
 import { toolMessage } from "../../../helpers/common";
 import VityToolKitSDKContext from "../../../utils/vityToolKitContext";
 
