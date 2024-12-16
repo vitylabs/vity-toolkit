@@ -42,7 +42,7 @@ import {
     twitterSearchComplianceJobsTool,
     twitterCreateComplianceJobTool,
     twitterGetComplianceJobResultTool,
- } from "./action.v2";
+ } from "./actions/v2";
 
 
 export class TwitterTool {

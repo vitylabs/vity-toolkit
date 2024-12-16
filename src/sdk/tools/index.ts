@@ -45,7 +45,7 @@ import {
     twitterSearchComplianceJobsTool,
     twitterCreateComplianceJobTool,
     twitterGetComplianceJobResultTool,
-} from "./twitter/action.v2";
+} from "./twitter/actions/v2";
 
 
 //  A P P S
