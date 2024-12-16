@@ -138,40 +138,40 @@ export class TwitterTool {
     //     });
     // }
 
-    getExpectedParamsForConnection(type: AuthType) {
-        switch (type) {
-            case AuthType.OAUTH_1:
-                return {
-                    "APP_KEY": "",
-                    "APP_SECRET": "",
-                    "ACCESS_TOKEN": "",
-                    "ACCESS_SECRET": ""
-                }
-            case AuthType.OAUTH_2:
-                return connectionMessage({
-                    success: false,
-                    message: "Currently, we do not support OAuth for Twitter"
-                });
-            case AuthType.API_KEY:
-                return connectionMessage({
-                    success: false,
-                    message: "Currently, we do not support API Key for Twitter"
-                });
-            case AuthType.PASSWORD_BASED_AUTH:
-                return connectionMessage({
-                    success: false,
-                    message: "Currently, we do not support Password Based Auth for Twitter"
-                });
-        }
-    }
+    // getExpectedParamsForConnection(type: AuthType) {
+    //     switch (type) {
+    //         case AuthType.OAUTH_1:
+    //             return connectionMessage({
+    //                 success: false,
+    //                 message: "Currently, we do not support OAuth for Twitter"
+    //             });
+    //         case AuthType.OAUTH_2:
+    //             return connectionMessage({
+    //                 success: false,
+    //                 message: "Currently, we do not support OAuth for Twitter"
+    //             });
+    //         case AuthType.API_KEY:
+    //             return {
+    //                 "APP_KEY": "",
+    //                 "APP_SECRET": "",
+    //                 "ACCESS_TOKEN": "",
+    //                 "ACCESS_SECRET": ""
+    //             }
+    //         case AuthType.PASSWORD_BASED_AUTH:
+    //             return connectionMessage({
+    //                 success: false,
+    //                 message: "Currently, we do not support Password Based Auth for Twitter"
+    //             });
+    //     }
+    // }
 
     // async getIntegration() {
     //     return null;
     // }
 
-    async getConnection() {
-        return null;
-    }
+    // async getConnection() {
+    //     return null;
+    // }
 
     // async initiateAppIntegration(authData: object) { // for the developer/company
     //     return integrationMessage({
@@ -180,9 +180,9 @@ export class TwitterTool {
     //     });
     // }
 
-    async initiateAppConnection(authData: object) { // for the user
-        console.log("Connection authData", authData);
-    }
+    // async initiateAppConnection(authData: object) { // for the user
+        
+    // }
 
 }
 
