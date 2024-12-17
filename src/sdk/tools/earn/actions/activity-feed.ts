@@ -3,6 +3,7 @@ import { toolMessage } from "../../../helpers/common";
 import { z } from "zod";
 
 import { makeAxiosRequest } from "../common";
+import logger from "../../../../utils/logger";
 
 const METHOD = 'GET';
 const URL_PATH = '/feed/get';
@@ -26,13 +27,13 @@ const earnActivityFeed = async (inputParams: {
 
     try {
         const response = await makeAxiosRequest(METHOD, fullUrl, null);
-        console.log(response);
+        logger.info(`Successfully retrieved feed`);
         return toolMessage({
             success: true,
-            data: response.data,
+            data: response,
         });
     } catch (error) {
-        console.error(error);
+        logger.error(`Error getting feed:`, error);
         return toolMessage({
             success: false,
             data: `
@@ -44,7 +45,7 @@ const earnActivityFeed = async (inputParams: {
 
 export const earnActivityFeedTool = createAction({
     name: "earnActivityFeedTool",
-    description: "Get the activity feed of users in superteam earn, like if someone submitted a bounty or added a new project in this profile, and much more",
+    description: "Get list of activities feed of users in superteam earn, like if someone submitted a bounty or added a new project in this profile, and much more",
     inputParams: z.object({
         timePeriod: z.string().optional().describe('Specifies the time period for filtering data (e.g., "this week", "this month")'),
         take: z.number().optional().describe('Number of records to retrieve (pagination limit)'),

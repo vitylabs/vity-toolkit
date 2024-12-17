@@ -3,11 +3,12 @@ import { toolMessage } from "../../../helpers/common";
 import { z } from "zod";
 
 import { makeAxiosRequest } from "../common";
+import logger from "../../../../utils/logger";
 
 const METHOD = 'POST';
-const URL_PATH = '/earn/homepage/listings';
+const URL_PATH = '/homepage/listings';
 
-const earnHomepageBountyListings = async (inputParams: {
+const earnBountyListings = async (inputParams: {
   order?: 'asc' | 'desc';
   statusFilter?: string;
   userRegion?: string[] | null;
@@ -15,13 +16,13 @@ const earnHomepageBountyListings = async (inputParams: {
 }): Promise<string> => {
   try {
     const response = await makeAxiosRequest(METHOD, URL_PATH, inputParams);
-    console.log(response);
+    logger.info(`Successfully fetched listings`);
     return toolMessage({
       success: true,
-      data: response.data,
+      data: response,
     });
   } catch (error) {
-    console.error(`Error fetching listings:`, error);
+    logger.error(`Error fetching listings:`, error);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching listings.`,
@@ -29,14 +30,14 @@ const earnHomepageBountyListings = async (inputParams: {
   }
 };
 
-export const earnHomepageBountyListingsTool = createAction({
-  name: "earnHomepageBountyListingsTool",
-  description: "Fetches bounty listings based on various filters and criteria from the Superteam Earn homepage.",
+export const earnBountyListingsTool = createAction({
+  name: "earnBountyListingsTool",
+  description: "Fetches all the bounty listings based on various filters and criteria from the Superteam Earn homepage.",
   inputParams: z.object({
-    order: z.enum(['asc', 'desc']).optional().describe('Order of the listings'),
+    order: z.enum(['asc', 'desc']).optional().describe('Order of the listings, e.g., "asc" or "desc"'),
     statusFilter: z.string().optional().describe('Status filter for the listings'),
     userRegion: z.array(z.string()).optional().nullable().describe('Array of user regions to filter listings'),
     excludeIds: z.array(z.string()).optional().describe('Array of listing IDs to exclude'),
   }),
-  execute: earnHomepageBountyListings,
+  execute: earnBountyListings,
 });

@@ -5,7 +5,7 @@ import { z } from "zod";
 import { makeAxiosRequest } from "../common";
 
 const METHOD = 'GET';
-const URL_TEMPLATE = '/earn/submission/details?submissionId={submissionId}';
+const URL_TEMPLATE = '/submission/details?submissionId={submissionId}';
 
 const earnSubmissionDetails = async (inputParams: { submissionId: string; }): Promise<string> => {
   const { submissionId } = inputParams;
@@ -32,6 +32,7 @@ export const earnSubmissionDetailsTool = createAction({
   description: "Fetches details of a specific submission based on the provided submission ID from the Superteam Earn homepage.",
   inputParams: z.object({
     submissionId: z.string().describe('ID of the submission to fetch details for'),
+    listingId: z.string().optional().describe('ID of the listing to fetch details for'),
   }),
   execute: earnSubmissionDetails,
 });

@@ -1,15 +1,14 @@
 import { earnActivityFeedTool } from "./actions/activity-feed"
-import { earnFetchFeedItemTool } from "./actions/fetch-feed-item"
 import { earnFetchGrantDetailsTool } from "./actions/fetch-grant-details"
-import { earnFetchSponsorGrantsTool } from "./actions/fetch-sponsor-grants"
+import { earnFetchExclusiveSponsorGrantsTool } from "./actions/fetch-exclusive-sponsor-grants"
 import { earnFetchUserPoWsTool } from "./actions/fetch-user-pow"
-import { earnHomepageBountyListingsTool } from "./actions/homepage-bounty-listings"
-import { earnListHomepageGrantsTool } from "./actions/list-homopage-grants"
+import { earnBountyListingsTool } from "./actions/bounty-listings"
+import { earnGrantsListingsTool } from "./actions/grants-listings"
 import { earnSearchUsersTool } from "./actions/search-users"
 import { earnSubmissionDetailsTool } from "./actions/submission-details"
 import { earnTotalUserCountTool } from "./actions/total-user-count"
-import { earnUserInfoTool } from "./actions/user-info"
 import { earnFetchUserPublicStatsTool } from "./actions/user-public-stats"
+import { earnFetchFeedTool } from "./actions/feed"
 
 
 export class EarnTool {
@@ -20,17 +19,16 @@ export class EarnTool {
     getTools() {
         return [
             earnActivityFeedTool,
-            earnFetchFeedItemTool,
             earnFetchGrantDetailsTool,
-            earnFetchSponsorGrantsTool,
+            earnFetchExclusiveSponsorGrantsTool,
             earnFetchUserPoWsTool,
-            earnHomepageBountyListingsTool,
-            earnListHomepageGrantsTool,
+            earnBountyListingsTool,
+            earnGrantsListingsTool,
             earnSearchUsersTool,
             earnSubmissionDetailsTool,
             earnTotalUserCountTool,
-            earnUserInfoTool,
-            earnFetchUserPublicStatsTool
+            earnFetchUserPublicStatsTool,
+            earnFetchFeedTool
         ]
     }
 
