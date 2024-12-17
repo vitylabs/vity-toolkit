@@ -59,18 +59,21 @@ import { earnSubmissionDetailsTool } from "./earn/actions/submission-details";
 import { earnTotalUserCountTool } from "./earn/actions/total-user-count";
 import { earnUserInfoTool } from "./earn/actions/user-info";
 import { earnFetchUserPublicStatsTool } from "./earn/actions/user-public-stats";
+import { EarnTool } from "./earn";
 
 
 //  A P P S
 
 export enum App {
     SOLANA_WALLET,
-    TWITTER
+    TWITTER,
+    EARN
 }
 
 export const appsMap = {
     [App.SOLANA_WALLET]: SolanaWalletTool,
     [App.TWITTER]: TwitterTool,
+    [App.EARN]: EarnTool
 }
 
 // Integrable apps

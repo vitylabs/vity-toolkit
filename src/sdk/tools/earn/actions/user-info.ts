@@ -19,7 +19,7 @@ const earnUserInfo = async (inputParams: { username: string; }): Promise<string>
     console.error(`Error fetching user info:`, error);
     return toolMessage({
       success: false,
-      data: `Error occurred while fetching user info.`,
+      data: `Error: ${error}`,
     });
   }
 };
