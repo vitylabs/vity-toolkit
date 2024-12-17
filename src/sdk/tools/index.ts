@@ -47,7 +47,18 @@ import {
     twitterGetComplianceJobResultTool,
 } from "./twitter/actions/v2";
 
-import { earnActivityFeedTool } from "./earn/actions/activity_feed";
+import { earnActivityFeedTool } from "./earn/actions/activity-feed";
+import { earnFetchFeedItemTool } from "./earn/actions/fetch-feed-item";
+import { earnFetchGrantDetailsTool } from "./earn/actions/fetch-grant-details";
+import { earnFetchSponsorGrantsTool } from "./earn/actions/fetch-sponsor-grants";
+import { earnFetchUserPoWsTool } from "./earn/actions/fetch-user-pow";
+import { earnHomepageBountyListingsTool } from "./earn/actions/homepage-bounty-listings";
+import { earnListHomepageGrantsTool } from "./earn/actions/list-homopage-grants";
+import { earnSearchUsersTool } from "./earn/actions/search-users";
+import { earnSubmissionDetailsTool } from "./earn/actions/submission-details";
+import { earnTotalUserCountTool } from "./earn/actions/total-user-count";
+import { earnUserInfoTool } from "./earn/actions/user-info";
+import { earnFetchUserPublicStatsTool } from "./earn/actions/user-public-stats";
 
 
 //  A P P S
@@ -124,7 +135,19 @@ export enum Action {
     TWITTER_CREATE_COMPLIANCE_JOB,
     TWITTER_GET_COMPLIANCE_JOB_RESULT,
 
-    EARN_ACTIVITY_FEED
+    EARN_ACTIVITY_FEED,
+    EARN_RECENT_SUBMISSIONS,
+    EARN_FETCH_FEED_ITEM,
+    EARN_FETCH_GRANT_DETAILS,
+    EARN_FETCH_SPONSOR_GRANTS,
+    EARN_FETCH_USER_POWS,
+    EARN_HOMEPAGE_BOUNTY_LISTINGS,
+    EARN_LIST_HOMEPAGE_GRANTS,
+    EARN_SEARCH_USERS,
+    EARN_SUBMISSION_DETAILS,
+    EARN_TOTAL_USER_COUNT,
+    EARN_USER_INFO,
+    EARN_FETCH_USER_PUBLIC_STATS,
 }
 
 export const actionsMap = {
@@ -172,7 +195,18 @@ export const actionsMap = {
     [Action.TWITTER_CREATE_COMPLIANCE_JOB]: twitterCreateComplianceJobTool,
     [Action.TWITTER_GET_COMPLIANCE_JOB_RESULT]: twitterGetComplianceJobResultTool,
 
-    [Action.EARN_ACTIVITY_FEED]: earnActivityFeedTool
+    [Action.EARN_ACTIVITY_FEED]: earnActivityFeedTool,
+    [Action.EARN_FETCH_FEED_ITEM]: earnFetchFeedItemTool,
+    [Action.EARN_FETCH_GRANT_DETAILS]: earnFetchGrantDetailsTool,
+    [Action.EARN_FETCH_SPONSOR_GRANTS]: earnFetchSponsorGrantsTool,
+    [Action.EARN_FETCH_USER_POWS]: earnFetchUserPoWsTool,
+    [Action.EARN_HOMEPAGE_BOUNTY_LISTINGS]: earnHomepageBountyListingsTool,
+    [Action.EARN_LIST_HOMEPAGE_GRANTS]: earnListHomepageGrantsTool,
+    [Action.EARN_SEARCH_USERS]: earnSearchUsersTool,
+    [Action.EARN_SUBMISSION_DETAILS]: earnSubmissionDetailsTool,
+    [Action.EARN_TOTAL_USER_COUNT]: earnTotalUserCountTool,
+    [Action.EARN_USER_INFO]: earnUserInfoTool,
+    [Action.EARN_FETCH_USER_PUBLIC_STATS]: earnFetchUserPublicStatsTool,
 }
 
 

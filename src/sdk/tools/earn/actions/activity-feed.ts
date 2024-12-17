@@ -7,6 +7,7 @@ import { makeAxiosRequest } from "../common";
 const METHOD = 'GET';
 const URL_PATH = '/feed/get';
 
+
 const earnActivityFeed = async (inputParams: {
     timePeriod?: string;
     take?: number;
