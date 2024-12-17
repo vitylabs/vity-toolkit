@@ -47,6 +47,8 @@ import {
     twitterGetComplianceJobResultTool,
 } from "./twitter/actions/v2";
 
+import { earnActivityFeedTool } from "./earn/actions/activity_feed";
+
 
 //  A P P S
 
@@ -120,7 +122,9 @@ export enum Action {
     TWITTER_GET_COMPLIANCE_JOB,
     TWITTER_SEARCH_COMPLIANCE_JOBS,
     TWITTER_CREATE_COMPLIANCE_JOB,
-    TWITTER_GET_COMPLIANCE_JOB_RESULT
+    TWITTER_GET_COMPLIANCE_JOB_RESULT,
+
+    EARN_ACTIVITY_FEED
 }
 
 export const actionsMap = {
@@ -166,7 +170,9 @@ export const actionsMap = {
     [Action.TWITTER_GET_COMPLIANCE_JOB]: twitterGetComplianceJobTool,
     [Action.TWITTER_SEARCH_COMPLIANCE_JOBS]: twitterSearchComplianceJobsTool,
     [Action.TWITTER_CREATE_COMPLIANCE_JOB]: twitterCreateComplianceJobTool,
-    [Action.TWITTER_GET_COMPLIANCE_JOB_RESULT]: twitterGetComplianceJobResultTool
+    [Action.TWITTER_GET_COMPLIANCE_JOB_RESULT]: twitterGetComplianceJobResultTool,
+
+    [Action.EARN_ACTIVITY_FEED]: earnActivityFeedTool
 }
 
 
