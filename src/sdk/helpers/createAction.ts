@@ -15,7 +15,7 @@ type ToolConfig = {
 export function createAction(config: ToolConfig) {
   const { name, description, inputParams, execute, isDynamic = false } = config;
 
-  if (isDynamic) {
+  if (isDynamic) { // Dynamic tools are used when the schema is not known at compile time
     return new DynamicStructuredTool({
       name,
       description,
