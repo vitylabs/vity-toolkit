@@ -1,6 +1,4 @@
-import { VityToolKit } from "../../src";
-import { App } from "../../src/sdk/tools";
-import { AuthType } from "../../src/sdk/types";
+import { VityToolKit } from "vity-toolkit";
 
 
 const toolkit = new VityToolKit({

@@ -1,12 +1,11 @@
-import { VityToolKit } from "../src";
-import { Action } from "../src/sdk/tools";
+import { Action, LangchainToolkit } from "vity-toolkit";
 import { ChatOpenAI } from "@langchain/openai";
 
 
 const model = new ChatOpenAI({ model: "gpt-4o" });
 
-const toolKit = new VityToolKit();
-const tools = await toolKit.getTools({ actions: [Action.SOLANA_WALLET_GENERATE_KEYPAIR, Action.SOLANA_WALLET_GET_BALANCE] });
+const toolKit = new LangchainToolkit();
+const tools = toolKit.getTools({ actions: [Action.SOLANA_WALLET_GENERATE_KEYPAIR, Action.SOLANA_WALLET_GET_BALANCE] });
 
 const modelWithTools = model.bindTools(tools);
 

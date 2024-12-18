@@ -1,4 +1,4 @@
-import { VityToolKit, Action } from "../../src";
+import { VityToolKit, Action } from "vity-toolkit";
 
 
 const toolKit = new VityToolKit({

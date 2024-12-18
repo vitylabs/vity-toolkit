@@ -1,16 +1,16 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import { createToolCallingAgent } from "langchain/agents";
-import { Action, VityToolKit } from "../../src";
+import { Action, LangchainToolkit } from "vity-toolkit";
 import { AgentExecutor } from "langchain/agents";
 
 
 const model = new ChatOpenAI({ model: "gpt-4o" });
-const toolKit = new VityToolKit({
+const toolKit = new LangchainToolkit({
     userPrivateKey: "<private_key>",
 });
 
-const tools = await toolKit.getTools({ actions: [Action.SOLANA_WALLET_TRANSFER, Action.SOLANA_WALLET_GET_BALANCE, Action.SOLANA_WALLET_GET_MY_PUBLIC_KEY] });
+const tools = toolKit.getTools({ actions: [Action.SOLANA_WALLET_TRANSFER, Action.SOLANA_WALLET_GET_BALANCE, Action.SOLANA_WALLET_GET_MY_PUBLIC_KEY] });
 const prompt = ChatPromptTemplate.fromMessages([
     ["system", "You are a helpful assistant"],
     ["placeholder", "{chat_history}"],
