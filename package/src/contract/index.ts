@@ -32,8 +32,42 @@ export class Contract {
         await this.program.methods.saveAppAuth(appName, authURI).rpc();
     }
 
-    async saveUserAuth(appId: PublicKey, appName: string, authURI: string) {
-        await this.program.methods.saveUserAuth(appId, appName, authURI).rpc();
+    async saveUserAuth(appAddress: PublicKey, appName: string, authURI: string) {
+        await this.program.methods.saveUserAuth(appName, appAddress, authURI).rpc();
+    }
+
+    async getAppAuth(appName: string, appAddress: PublicKey) {
+        const [pdaAddress, _] = anchor.web3.PublicKey.findProgramAddressSync(
+            [
+                Buffer.from(appName),
+                anchor.utils.bytes.utf8.encode('app-auth'),
+                appAddress.toBuffer(),
+            ],
+            this.program.programId
+        )
+        try {
+            let authDetails = await this.program.account.appAuth.fetch(pdaAddress);
+            return authDetails;
+        } catch (error) {
+            logger.error("Error fetching the auth :: ", error);
+        }
+    }
+
+    async getUserAuth(appName: string, userAddress: PublicKey) {
+        const [pdaAddress, _] = anchor.web3.PublicKey.findProgramAddressSync(
+            [
+                Buffer.from(appName),
+                anchor.utils.bytes.utf8.encode('user-auth'),
+                userAddress.toBuffer(),
+            ],
+            this.program.programId
+        )
+        try {
+            let authDetails = await this.program.account.userAuth.fetch(pdaAddress);
+            return authDetails;
+        } catch (error) {
+            logger.error("Error fetching the auth :: ", error);
+        }
     }
 
 }
