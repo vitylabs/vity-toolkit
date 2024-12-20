@@ -3,6 +3,7 @@
 [features]
 resolution = true
 skip-lint = false
+seeds = true
 
 [programs.localnet]
 contract = "AEqfthAnEGQ27vp6Dy9nDzZPJL1wcicbGeiLcWnptn3N"
@@ -11,7 +12,7 @@ contract = "AEqfthAnEGQ27vp6Dy9nDzZPJL1wcicbGeiLcWnptn3N"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
