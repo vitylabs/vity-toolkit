@@ -9,8 +9,8 @@ describe("contract", () => {
 
   // App Auth
 
-  it("Save app auth", async () => {
-    const ix = program.methods.saveAppAuth("X", "app_ipfs_uri");
+  it("Save app's X auth", async () => {
+    const ix = program.methods.saveAppAuth("X", "app_auth_cid");
     const pdaAddress = (await ix.pubkeys()).appAuth;
     console.log("PDA address :: ", pdaAddress.toString());
 
@@ -21,10 +21,11 @@ describe("contract", () => {
     console.log("Auth details", JSON.stringify(authDetails, null, 2));
   });
 
-  it("Get already saved app auth", async () => {
+  it("Get saved app's X auth", async () => {
     const appAddress = new anchor.web3.PublicKey("CFkpmQ1mWkxDapUiNUA3uwNG2zjwkTGUEf1Cwh58YZj6");
     const [pdaAddress, _] = anchor.web3.PublicKey.findProgramAddressSync(
       [
+        Buffer.from("X"),
         anchor.utils.bytes.utf8.encode('app-auth'),
         appAddress.toBuffer(),
       ],
@@ -40,10 +41,10 @@ describe("contract", () => {
 
   // User Auth
 
-  it("Save user auth", async () => {
+  it("Save user's telegram auth", async () => {
     const appAddress = new anchor.web3.PublicKey("CFkpmQ1mWkxDapUiNUA3uwNG2zjwkTGUEf1Cwh58YZj6");
 
-    const ix = program.methods.saveUserAuth(appAddress, "X", "user_ipfs_uri");
+    const ix = program.methods.saveUserAuth("telegram", appAddress, "telegram_user_auth_cid");
     const pdaAddress = (await ix.pubkeys()).userAuth;
     console.log("PDA address :: ", pdaAddress.toString());
 
@@ -54,11 +55,31 @@ describe("contract", () => {
     console.log("Auth details", JSON.stringify(authDetails, null, 2));
   });
 
-  it("Get already saved user auth", async () => {
+  it("Get saved user's X auth", async () => {
     const userAddress = new anchor.web3.PublicKey("CFkpmQ1mWkxDapUiNUA3uwNG2zjwkTGUEf1Cwh58YZj6");
 
     const [pdaAddress, _] = anchor.web3.PublicKey.findProgramAddressSync(
       [
+        Buffer.from("X"),
+        anchor.utils.bytes.utf8.encode('user-auth'),
+        userAddress.toBuffer(),
+      ],
+      program.programId
+    )
+    try {
+      let authDetails = await program.account.userAuth.fetch(pdaAddress);
+      console.log("Auth details", JSON.stringify(authDetails, null, 2));
+    } catch (error) {
+      console.log("Error fetching the auth :: ", error);
+    }
+  });
+
+  it("Get saved user's telegram auth", async () => {
+    const userAddress = new anchor.web3.PublicKey("CFkpmQ1mWkxDapUiNUA3uwNG2zjwkTGUEf1Cwh58YZj6");
+
+    const [pdaAddress, _] = anchor.web3.PublicKey.findProgramAddressSync(
+      [
+        Buffer.from("telegram"),
         anchor.utils.bytes.utf8.encode('user-auth'),
         userAddress.toBuffer(),
       ],
