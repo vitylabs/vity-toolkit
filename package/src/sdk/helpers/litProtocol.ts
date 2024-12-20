@@ -1,4 +1,7 @@
+import type { Keypair } from "@solana/web3.js";
 import type { SiwsObject } from "../utils/lit-protocol/types";
+import { base58 } from "ethers/src.ts/utils";
+import nacl from "tweetnacl";
 
 export const getSiwsMessage = (siwsInput: SiwsObject['siwsInput']) => {
     console.log('🔄 Generating SIWS message...');
@@ -37,4 +40,16 @@ export const getSiwsMessage = (siwsInput: SiwsObject['siwsInput']) => {
 
     console.log(`✅ Generated SIWS message:\n${message}`);
     return message;
+};
+
+export const signSiwsMessage = (
+    messageBytes: Uint8Array,
+    solanaSigner: Keypair
+) => {
+    console.log('🔄 Signing SIWS message...');
+    const signature = base58.encode(
+        nacl.sign.detached(messageBytes, solanaSigner.secretKey)
+    );
+    console.log(`✅ Signed SIWS message: ${signature}`);
+    return signature;
 };

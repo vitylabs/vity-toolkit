@@ -59,6 +59,8 @@
     "langchain": "^0.3.7",
     "node-localstorage": "^3.0.5",
     "openai": "^4.76.0",
+    "pinata": "^1.10.1",
+    "tweetnacl": "^1.0.3",
     "twitter-api-v2": "^1.18.2",
     "winston": "^3.17.0",
     "zod": "^3.23.8"
