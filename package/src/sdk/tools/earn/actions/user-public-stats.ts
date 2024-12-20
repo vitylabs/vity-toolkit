@@ -3,7 +3,7 @@ import { toolMessage } from "../../../helpers/common";
 import { z } from "zod";
 
 import { makeAxiosRequest } from "../common";
-import logger from "../../../../utils/logger";
+import logger from "../../../utils/logger";
 
 const METHOD = 'POST';
 const URL_PATH = '/user/public-stats';

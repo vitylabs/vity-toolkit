@@ -9,6 +9,7 @@ import {
 } from "@lit-protocol/auth-helpers";
 import { getKeypair } from "../../helpers/getPublicKey";
 import { Keypair, PublicKey } from "@solana/web3.js";
+import type { SiwsObject } from "./types";
 
 
 function conditionsToDecrypt(publicKey: PublicKey) {
@@ -29,19 +30,34 @@ function conditionsToDecrypt(publicKey: PublicKey) {
   ];
 }
 
-class Lit {
-  private privateKey: string;
-  private litNodeClient!: LitJsSdk.LitNodeClientNodeJs;
-  private solanaWallet: Keypair;
+function getSIWSObject(solanaSigner: Keypair): SiwsObject {
+  return {
+    siwsInput: {
+      address: solanaSigner.publicKey.toBase58(),
+      domain: 'localhost',
+      uri: 'http://localhost:3000',
+      statement:
+        'This is a test statement, replace this with whatever you want',
+      expirationTime: new Date(Date.now() + 60 * 60 * 10).toISOString(), // 10 minutes from now
+      resources: [],
+    },
+    signature: '',
+  };
+}
 
-  constructor(privateKey: string, debug: boolean = false, accessComtrolConditions: Array<object> = []) {
-    this.privateKey = privateKey;
+class Lit {
+  private solanaPrivateKey: string;
+  private litNodeClient!: LitJsSdk.LitNodeClientNodeJs;
+  private solanaSigner: Keypair;
+
+  constructor(solanaPrivateKey: string, debug: boolean = false, accessComtrolConditions: Array<object> = []) {
+    this.solanaPrivateKey = solanaPrivateKey;
     this.litNodeClient = new LitJsSdk.LitNodeClientNodeJs({
       litNetwork: LIT_NETWORK.DatilDev,
       // debug: debug,
     });
-    if (privateKey) {
-      this.solanaWallet = getKeypair(privateKey);
+    if (solanaPrivateKey) {
+      this.solanaSigner = getKeypair(solanaPrivateKey);
     } else {
       throw new Error("Private key is required");
     }
@@ -66,7 +82,7 @@ class Lit {
    */
   async encrypt(message: string): Promise<{ dataToEncryptHash: string, ciphertext: string }> {
     try {
-      const solRpcConditions = conditionsToDecrypt(this.solanaWallet.publicKey);
+      const solRpcConditions = conditionsToDecrypt(this.solanaSigner.publicKey);
 
       // Encrypt the message
       const { ciphertext, dataToEncryptHash } = await this.litNodeClient.encrypt(
@@ -92,7 +108,7 @@ class Lit {
      */
   async decrypt(ciphertext: string, dataToEncryptHash: string): Promise<string> {
     try {
-      const solRpcConditions = conditionsToDecrypt(this.solanaWallet.publicKey);
+      const solRpcConditions = conditionsToDecrypt(this.solanaSigner.publicKey);
       // const sessionSigs = await this.getSessionSignatures();
 
       const decryptedString = await decryptToString(
