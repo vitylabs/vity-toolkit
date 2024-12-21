@@ -32,7 +32,7 @@ export function decryptData(payload: { iv: string; authTag: string; ciphertext: 
 }
 
 // Usage:
-const solanaPrivatekey = "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv";
-const result = encryptData("Sensitive data", solanaPrivatekey);
-console.log("Encrypted=", result);
-console.log("Decrypted=", decryptData(result, solanaPrivatekey));
+// const solanaPrivatekey = "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv";
+// const result = encryptData("Sensitive data", solanaPrivatekey);
+// console.log("Encrypted=", result);
+// console.log("Decrypted=", decryptData(result, solanaPrivatekey));
