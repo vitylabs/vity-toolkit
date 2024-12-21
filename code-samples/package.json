@@ -2,10 +2,12 @@
   "dependencies": {
     "@langchain/core": "",
     "@langchain/openai": "",
+    "dotenv": "^16.4.7",
     "langchain": "",
     "openai": "^4.50.0"
   },
   "devDependencies": {
+    "@types/node": "^22.10.2",
     "tsup": "^8.3.5"
   }
 }

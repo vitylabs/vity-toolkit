@@ -23,7 +23,7 @@ export class PinataStorageProvider {
     public async store(json: object): Promise<string | undefined> {
         try {
             const upload = await this.pinata.upload.json(json);
-            logger.info(`Successfully stored data on Pinata with CID: ${upload.cid}`);
+            logger.debug(`Successfully stored data on Pinata with CID: ${upload.cid}`);
             return upload.cid;
         } catch (error) {
             logger.error(`Error storing data on Pinata: ${error}`);
@@ -31,18 +31,28 @@ export class PinataStorageProvider {
         }
     }
 
-    public async retrieve(cid: string): Promise<string | undefined> {
+    public async retrieve(cid: string): Promise<object | undefined> {
         try {
-            const data = await this.pinata.gateways.get(cid);
-
             const url = await this.pinata.gateways.createSignedURL({
                 cid: cid,
                 expires: 1800,
             });
-            logger.info(`Successfully retrieved data from Pinata with CID: ${cid}`);
-            return url;
+            const json = await this.fetchJSON(url);
+
+            logger.debug(`Successfully retrieved data from Pinata with CID: ${cid}`);
+            return json;
         } catch (error) {
             logger.error(`Error retrieving data from Pinata with CID: ${cid}: ${error}`);
+            throw error;
+        }
+    }
+
+    private async fetchJSON(url: string): Promise<object> {
+        try {
+            const response = await fetch(url);
+            return await response.json();
+        } catch (error) {
+            logger.error(`Error fetching JSON from URL: ${url}: ${error}`);
             throw error;
         }
     }

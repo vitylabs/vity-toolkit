@@ -3,9 +3,7 @@
   "version": "0.1.1",
   "description": "A powerful tool library for LLMs & AI agents",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/apneduniya/vity-toolkit.git"
@@ -50,6 +48,7 @@
     "@lit-protocol/encryption": "^7.0.1",
     "@lit-protocol/lit-node-client-nodejs": "^7.0.1",
     "@lit-protocol/wrapped-keys": "^7.0.1",
+    "@project-serum/anchor": "^0.26.0",
     "@solana/spl-token": "^0.4.9",
     "@solana/web3.js": "^1.95.8",
     "@types/node": "^22.10.2",

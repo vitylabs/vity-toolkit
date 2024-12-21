@@ -2,17 +2,20 @@ import { integrationMessage, toolMessage, type IToolMessage } from "./helpers/co
 import { getPublicKey } from "./helpers/getPublicKey";
 import VityToolKitSDKContext from "./utils/vityToolKitContext";
 import { Action, actionsMap, App, appsMap, type ConnectableApps, type IntegrableApps } from "./tools";
-import type { AuthType } from "./types";
+import type { AppAuth, AuthType } from "./types";
 import { StorageProvider, storageProviderMap } from "../storage-providers";
-import { encryptData } from "./helpers/encryption";
+import { decryptData, encryptData } from "./helpers/encryption";
 import logger from "./utils/logger";
+import { Contract } from "../contract";
+import { PublicKey } from "@solana/web3.js";
 
 
 export class VityToolKit {
     private readonly storageProvider: StorageProvider;
 
     constructor({ userPrivateKey, appPrivateKey, storageProvider }: { userPrivateKey?: string, appPrivateKey?: string, storageProvider?: StorageProvider } = {}) {
-        this.storageProvider = storageProvider || StorageProvider.PINATA;  
+        this.storageProvider = storageProvider || StorageProvider.PINATA;
+        
         if (userPrivateKey) {
             VityToolKitSDKContext.userPrivateKey = userPrivateKey;
             VityToolKitSDKContext.userPublicKey = getPublicKey(userPrivateKey);
@@ -57,17 +60,10 @@ export class VityToolKit {
     //     return new appsMap[app]().getExpectedParamsForConnection(type);
     // }
 
-    // async getIntegration(app: IntegrableApps) {
-
-    // }
-
-    // async getConnection(app: ConnectableApps) {
-
-    // }
-
-    async appIntegration({ app, type, authData }: { app: IntegrableApps, type?: AuthType, authData: object }) {
-        // validate
+    async getIntegration({ app, type }: { app: IntegrableApps, type?: AuthType }) {
+        // validate 
         const appPrivateKey = VityToolKitSDKContext.appPrivateKey;
+        const appPublicKey = VityToolKitSDKContext.appPublicKey;
         if (!appPrivateKey) { // check if app private key is present
             logger.error("App private key is missing");
             return integrationMessage({
@@ -76,14 +72,79 @@ export class VityToolKit {
             });
         }
 
+        if (!appPublicKey) { // check if app public key is present
+            logger.error("App public key is missing");
+            return integrationMessage({
+                success: false,
+                data: "App public key is missing",
+            });
+        }
+
+        // get from smart contract
+        const contract = new Contract(appPrivateKey);
+        const dataURI = await contract.getAppAuth(app, new PublicKey(appPublicKey));
+        if (!dataURI) { // check if smart contract failed to fetch data
+            throw new Error("Failed to fetch app uri from smart contract");
+        }
+
+        // get from storage provider (data object)
+        const storageProvider = this.storageProvider;
+        const storageProviderInstance = new storageProviderMap[storageProvider]();
+        const authData = await storageProviderInstance.retrieve(dataURI);
+
+        // get from storage provider (auth data - env variables)
+        const authCID = (authData as { authUri: string }).authUri;
+        const encryptedAuthData = await storageProviderInstance.retrieve(authCID);
+        if (!encryptedAuthData) { // check if storage provider failed to fetch data
+            throw new Error("Failed to fetch auth data from storage provider");
+        }
+
+        // decrypt auth data
+        const { iv, authTag, ciphertext } = encryptedAuthData as { iv: string; authTag: string; ciphertext: string };
+        const decryptedAuthData = decryptData({ iv, authTag, ciphertext }, appPrivateKey);
+        if (!decryptedAuthData) { // check if decryption failed
+            throw new Error("Failed to decrypt auth data");
+        }
+        const decryptedAuthDataObject = JSON.parse(decryptedAuthData);
+        
+        
+        logger.info(`Successfully fetched integration details for app: ${app}`);
+        return integrationMessage({
+            success: true,
+            data: decryptedAuthDataObject,
+        });
+
+    }
+
+    // async getConnection(app: ConnectableApps) {
+
+    // }
+
+    async appIntegration({ app, type, authData }: { app: IntegrableApps, type?: AuthType, authData: object }) {
+        // validate
+        const appPrivateKey = VityToolKitSDKContext.appPrivateKey;
+        const appPublicKey = VityToolKitSDKContext.appPublicKey;
+        if (!appPrivateKey) { // check if app private key is present
+            logger.error("App private key is missing");
+            return integrationMessage({
+                success: false,
+                data: "App private key is missing",
+            });
+        }
+
+        if (!appPublicKey) { // check if app public key is present
+            logger.error("App public key is missing");
+            return integrationMessage({
+                success: false,
+                data: "App public key is missing",
+            });
+        }
+
         const params: { [key: string]: any } = this.getExpectedParamsForIntegration({ app, type });
         const missingParams = Object.keys(params).filter(param => !(param in authData));
         if (missingParams.length > 0) { // check if all required parameters are present for requested app integration
             logger.error(`Missing required parameters: ${missingParams.join(', ')}`);
-            return integrationMessage({
-                success: false,
-                data: `Missing required parameters: ${missingParams.join(', ')}`,
-            });
+            throw new Error(`Missing required parameters: ${missingParams.join(', ')}`);
         }
 
         // encrypt
@@ -94,10 +155,30 @@ export class VityToolKit {
         const storageProvider = this.storageProvider;
         const storageProviderInstance = new storageProviderMap[storageProvider]();
 
-        const cid = await storageProviderInstance.store(encryptedAuthData);
+        const authCID = await storageProviderInstance.store(encryptedAuthData);
+        if (!authCID) { // check if storage provider failed to store data
+            throw new Error("Failed to store auth data in storage provider");
+        }
+
+        // save the encrypt uri with other needed data in storage provider again
+        const appAuthData: AppAuth = {
+            appAddress: appPublicKey,
+            authUri: authCID,
+        }
+        const cid = await storageProviderInstance.store(appAuthData);
+        if (!cid) { // check if storage provider failed to store data
+            throw new Error("Failed to store app uri in storage provider");
+        }
 
         // save in smart contract
-        
+        const contract = new Contract(appPrivateKey);
+        await contract.saveAppAuth(app, cid);
+
+        logger.info(`Successfully integrated app: ${app}`);
+        return integrationMessage({
+            success: true,
+            data: `Successfully integrated app: ${app}`,
+        });
     }
 
     // async initiateAppConnection({ app, authData }: { app: ConnectableApps, authData: object }) {

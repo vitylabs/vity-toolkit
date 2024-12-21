@@ -10,7 +10,7 @@ describe("contract", () => {
   // App Auth
 
   it("Save app's X auth", async () => {
-    const ix = program.methods.saveAppAuth("earn", "bafkreig72kreahq2cs2hxf6eh4rjdhj5ow7uovnzefkq44gd27tbv2rpay");
+    const ix = program.methods.saveAppAuth("google-calendar", "bafkreig72kreahq2cs2hxf6eh4rjdhj5ow7uovnzefkq44gd27tbv2rpay");
     const pdaAddress = (await ix.pubkeys()).appAuth;
     console.log("PDA address :: ", pdaAddress.toString());
 
@@ -22,10 +22,10 @@ describe("contract", () => {
   });
 
   it("Get saved app's X auth", async () => {
-    const appAddress = new anchor.web3.PublicKey("CFkpmQ1mWkxDapUiNUA3uwNG2zjwkTGUEf1Cwh58YZj6");
+    const appAddress = new anchor.web3.PublicKey("9zffT4S8QDCp11Z473gSmKt5xY12aHvuxYJSBnF7CRQ");
     const [pdaAddress, _] = anchor.web3.PublicKey.findProgramAddressSync(
       [
-        Buffer.from("earn"),
+        Buffer.from("google-calendar"),
         anchor.utils.bytes.utf8.encode('app-auth'),
         appAddress.toBuffer(),
       ],
@@ -44,7 +44,7 @@ describe("contract", () => {
   it("Save user's telegram auth", async () => {
     const appAddress = new anchor.web3.PublicKey("CFkpmQ1mWkxDapUiNUA3uwNG2zjwkTGUEf1Cwh58YZj6");
 
-    const ix = program.methods.saveUserAuth("X", appAddress, "bafkreig72kreahq2cs2hxf6eh4rjdhj5ow7uovnzefkq44gd27tbv2rpay");
+    const ix = program.methods.saveUserAuth("google-calendar", "bafkreig72kreahq2cs2hxf6eh4rjdhj5ow7uovnzefkq44gd27tbv2rpay");
     const pdaAddress = (await ix.pubkeys()).userAuth;
     console.log("PDA address :: ", pdaAddress.toString());
 
@@ -60,7 +60,7 @@ describe("contract", () => {
 
     const [pdaAddress, _] = anchor.web3.PublicKey.findProgramAddressSync(
       [
-        Buffer.from("X"),
+        Buffer.from("google-calendar"),
         anchor.utils.bytes.utf8.encode('user-auth'),
         userAddress.toBuffer(),
       ],
