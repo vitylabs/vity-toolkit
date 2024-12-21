@@ -63,9 +63,9 @@ import { earnFetchUserPublicStatsTool } from "./earn/actions/user-public-stats";
 //  A P P S
 
 export enum App {
-    SOLANA_WALLET,
-    TWITTER,
-    EARN
+    SOLANA_WALLET = 'solana-wallet',
+    TWITTER = 'twitter',
+    EARN = 'earn'
 }
 
 export const appsMap = {
