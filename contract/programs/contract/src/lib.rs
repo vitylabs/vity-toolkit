@@ -62,7 +62,7 @@ pub struct SaveAppAuth<'info> {
 impl SaveAppAuth<'_> {
     const LEN: usize = 8 + // discriminator
         32 + // app_id
-        32 + // auth_uri
+        64 + // auth_uri
         1; // bump
 }
 
@@ -86,7 +86,7 @@ impl SaveUserAuth<'_> {
     const LEN: usize = 8 + // discriminator
         32 + // app_id
         32 + // authority
-        32 + // auth_uri
+        64 + // auth_uri
         1; // bump
 }
 
