@@ -8,8 +8,8 @@ export class PinataStorageProvider {
     private readonly pinata: PinataSDK;
 
     constructor() {
-        this.pinataJwt = process.env.PUBLIC_PINATA_JWT as string;
-        this.pinataGateway = process.env.PUBLIC_PINATA_GATEWAY as string;
+        this.pinataJwt = process.env.PINATA_JWT as string;
+        this.pinataGateway = process.env.PINATA_GATEWAY as string;
         if (!this.pinataJwt || !this.pinataGateway) {
             throw new Error('Pinata JWT and Gateway are required in environment variables');
         }
