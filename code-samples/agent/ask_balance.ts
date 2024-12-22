@@ -6,12 +6,8 @@ import { ChatPromptTemplate } from "@langchain/core/prompts";
 
 const llm = new ChatOpenAI({ model: "gpt-4o" });
 const toolKit = new LangchainToolkit();
-// const toolKit = new VityToolKit({ userPrivateKey: "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv"});
 
 const tools = toolKit.getTools({ actions: [Action.SOLANA_WALLET_GENERATE_KEYPAIR, Action.SOLANA_WALLET_GET_BALANCE, Action.SOLANA_WALLET_GET_MY_PUBLIC_KEY] });
-// const prompt = await pull(
-//     "hwchase17/openai-functions-agent"
-// );
 
 const prompt = ChatPromptTemplate.fromMessages([
   ["system", "You are a helpful assistant"],

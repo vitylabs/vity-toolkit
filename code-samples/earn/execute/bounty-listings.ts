@@ -1,7 +1,7 @@
-import { VityToolKit, Action } from "vity-toolkit";
+import { LangchainToolkit, Action } from "vity-toolkit";
 
 
-const toolKit = new VityToolKit();
+const toolKit = new LangchainToolkit();
 const result = await toolKit.executeAction({ action: Action.EARN_BOUNTY_LISTINGS });
 
 console.log(result.data);
