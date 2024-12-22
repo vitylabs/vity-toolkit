@@ -1,3 +1,5 @@
+import type { StorageProvider } from "../../storage-providers";
+
 /*
     VityToolKitSDKContext class provides a global context for storing SDK configuration.
     This singleton class maintains essential SDK settings like user's privateKey.
@@ -10,6 +12,7 @@ class VityToolKitSDKContext {
     static appPublicKey?: string;
     static userPrivateKey?: string;
     static userPublicKey?: string;
+    static storageProvider?: StorageProvider;
 }
 
 export default VityToolKitSDKContext;

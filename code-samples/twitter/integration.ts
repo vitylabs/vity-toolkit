@@ -1,14 +1,14 @@
-import { App, VityToolKit } from 'vity-toolkit';
+import { App, LangchainToolkit } from 'vity-toolkit';
 
-const toolkit = new VityToolKit({
+const toolkit = new LangchainToolkit({
     appPrivateKey: "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv"
 });
 
-const iDetails = await toolkit.getIntegration({ app: App.TWITTER });
+const iDetails = await toolkit.isIntegration({ app: App.TWITTER });
 
 
 if (iDetails.success) {
-    console.log("Integration details:\n", iDetails.data);
+    console.log("Integration already exists!");
 } else {
     // Get the expected params for the integration and fill in the required values
     const params = toolkit.getExpectedParamsForIntegration({ app: App.TWITTER });

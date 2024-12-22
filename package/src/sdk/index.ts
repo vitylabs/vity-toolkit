@@ -15,6 +15,7 @@ export class VityToolKit {
 
     constructor({ userPrivateKey, appPrivateKey, storageProvider }: { userPrivateKey?: string, appPrivateKey?: string, storageProvider?: StorageProvider } = {}) {
         this.storageProvider = storageProvider || StorageProvider.PINATA;
+        VityToolKitSDKContext.storageProvider = this.storageProvider;
         
         if (userPrivateKey) {
             VityToolKitSDKContext.userPrivateKey = userPrivateKey;
@@ -56,11 +57,11 @@ export class VityToolKit {
         return new appsMap[app]().getExpectedParamsForIntegration(type);
     }
 
-    // getExpectedParamsForConnection({ app, type }: { app: ConnectableApps, type: AuthType }) {
-    //     return new appsMap[app]().getExpectedParamsForConnection(type);
-    // }
+    getExpectedParamsForConnection({ app, type }: { app: ConnectableApps, type: AuthType }) {
+        return new appsMap[app]().getExpectedParamsForConnection(type);
+    }
 
-    async getIntegration({ app, type }: { app: IntegrableApps, type?: AuthType }) {
+    async isIntegration({ app, type }: { app: IntegrableApps, type?: AuthType }) {
         // validate 
         const appPrivateKey = VityToolKitSDKContext.appPrivateKey;
         const appPublicKey = VityToolKitSDKContext.appPublicKey;
@@ -87,36 +88,13 @@ export class VityToolKit {
             throw new Error("Failed to fetch app uri from smart contract");
         }
 
-        // get from storage provider (data object)
-        const storageProvider = this.storageProvider;
-        const storageProviderInstance = new storageProviderMap[storageProvider]();
-        const authData = await storageProviderInstance.retrieve(dataURI);
-
-        // get from storage provider (auth data - env variables)
-        const authCID = (authData as { authUri: string }).authUri;
-        const encryptedAuthData = await storageProviderInstance.retrieve(authCID);
-        if (!encryptedAuthData) { // check if storage provider failed to fetch data
-            throw new Error("Failed to fetch auth data from storage provider");
-        }
-
-        // decrypt auth data
-        const { iv, authTag, ciphertext } = encryptedAuthData as { iv: string; authTag: string; ciphertext: string };
-        const decryptedAuthData = decryptData({ iv, authTag, ciphertext }, appPrivateKey);
-        if (!decryptedAuthData) { // check if decryption failed
-            throw new Error("Failed to decrypt auth data");
-        }
-        const decryptedAuthDataObject = JSON.parse(decryptedAuthData);
-        
-        
-        logger.info(`Successfully fetched integration details for app: ${app}`);
         return integrationMessage({
-            success: true,
-            data: decryptedAuthDataObject,
+            success: true
         });
 
     }
 
-    // async getConnection(app: ConnectableApps) {
+    // async isConnection(app: ConnectableApps) {
 
     // }
 
