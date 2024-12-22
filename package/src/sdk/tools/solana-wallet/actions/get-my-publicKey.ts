@@ -29,7 +29,7 @@ export const solanaWalletGetMyPublicKey = async (): Promise<string> => {
 
 export const solanaWalletGetMyPublicKeyTool = createAction({
     name: "solanaWalletGetMyPublicKeyTool",
-    description: "Retrieve the balance of a Solana account.",
+    description: "Get the public key of the current user",
     inputParams: z.object({}),
     execute: solanaWalletGetMyPublicKey,
 });

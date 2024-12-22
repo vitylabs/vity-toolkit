@@ -30,7 +30,7 @@ const earnFetchUserPoWs = async (inputParams: { userId: string; }): Promise<stri
 
 export const earnFetchUserPoWsTool = createAction({
   name: "earnFetchUserPoWsTool",
-  description: `Fetches Proofs of Work (PoWs) for a specific usre based on the provided user ID (like 8bf27154-1871-40a7-892c-5f6fd338ff09) from Superteam Earn.
+  description: `Fetches Proofs of Work (PoWs) for a specific user based on the provided user ID (like 8bf27154-1871-40a7-892c-5f6fd338ff09) from Superteam Earn.
   Pro Tip: If you have username of the user, you can use the search users tool to get the user ID.`,
   inputParams: z.object({
     userId: z.string().describe('User ID to fetch PoWs (like 8bf27154-1871-40a7-892c-5f6fd338ff09)'),

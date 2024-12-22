@@ -58,6 +58,7 @@ import { earnSearchUsersTool } from "./earn/actions/search-users";
 import { earnSubmissionDetailsTool } from "./earn/actions/submission-details";
 import { earnTotalUserCountTool } from "./earn/actions/total-user-count";
 import { earnFetchUserPublicStatsTool } from "./earn/actions/user-public-stats";
+import { earnFetchFeedTool } from "./earn/actions/feed";
 
 
 //  A P P S
@@ -137,7 +138,6 @@ export enum Action {
     TWITTER_GET_COMPLIANCE_JOB_RESULT,
 
     EARN_ACTIVITY_FEED,
-    EARN_RECENT_SUBMISSIONS,
     EARN_FETCH_FEED,
     EARN_FETCH_GRANT_DETAILS,
     EARN_FETCH_EXCLUSIVE_SPONSOR_GRANTS,
@@ -147,7 +147,6 @@ export enum Action {
     EARN_SEARCH_USERS,
     EARN_SUBMISSION_DETAILS,
     EARN_TOTAL_USER_COUNT,
-    EARN_USER_INFO,
     EARN_FETCH_USER_PUBLIC_STATS,
 }
 
@@ -197,7 +196,7 @@ export const actionsMap = {
     [Action.TWITTER_GET_COMPLIANCE_JOB_RESULT]: twitterGetComplianceJobResultTool,
 
     [Action.EARN_ACTIVITY_FEED]: earnActivityFeedTool,
-    [Action.EARN_FETCH_FEED]: earnActivityFeedTool,
+    [Action.EARN_FETCH_FEED]: earnFetchFeedTool,
     [Action.EARN_FETCH_GRANT_DETAILS]: earnFetchGrantDetailsTool,
     [Action.EARN_FETCH_EXCLUSIVE_SPONSOR_GRANTS]: earnFetchExclusiveSponsorGrantsTool,
     [Action.EARN_FETCH_USER_POWS]: earnFetchUserPoWsTool,
