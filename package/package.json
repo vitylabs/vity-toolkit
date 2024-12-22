@@ -1,6 +1,6 @@
 {
   "name": "vity-toolkit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A powerful tool library for LLMs & AI agents",
   "type": "module",
   "main": "./src/index.ts",
@@ -22,7 +22,9 @@
     "web3",
     "onchain agents",
     "langchain",
-    "tools"
+    "tools",
+    "superteam",
+    "earn"
   ],
   "author": {
     "name": "Adarsh",
