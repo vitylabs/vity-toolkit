@@ -28,7 +28,7 @@ pub mod contract {
     pub fn save_user_auth(
         ctx: Context<SaveUserAuth>,
         _app_name: String,
-        // app_id: Pubkey,
+        _app_id: Pubkey,
         // auth_uri: String,
         uri: String,
     ) -> Result<()> {
@@ -71,7 +71,7 @@ impl SaveAppAuth<'_> {
 }
 
 #[derive(Accounts)]
-#[instruction(_app_name: String)] // like "twitter"
+#[instruction(_app_name: String, _app_id: Pubkey)] // like "twitter"
 pub struct SaveUserAuth<'info> {
     #[account(mut)]
     pub signer: Signer<'info>,
@@ -79,7 +79,7 @@ pub struct SaveUserAuth<'info> {
         init_if_needed,
         payer = signer,
         space = SaveUserAuth::LEN,
-        seeds = [_app_name.as_ref(), "user-auth".as_bytes(), signer.key().as_ref()], 
+        seeds = [_app_name.as_ref(), "user-auth".as_bytes(), _app_id.as_ref(), signer.key().as_ref()], 
         bump,
     )]
     pub user_auth: Account<'info, UserAuth>,
