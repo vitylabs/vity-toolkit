@@ -74,7 +74,11 @@ export class VityToolKit {
     }
 
     getExpectedParamsForConnection({ app, type }: { app: ConnectableApps, type: AuthType }) {
-        return appsMap[app].getExpectedParamsForConnection(type);
+        try {
+            return appsMap[app].getExpectedParamsForConnection(type);
+        } catch (error) {
+            throw error;
+        }
     }
 
     async isIntegration({ app, type }: { app: IntegrableApps, type?: AuthType }) {
@@ -276,7 +280,7 @@ export class VityToolKit {
         try {
             params = this.getExpectedParamsForConnection({ app, type });
         } catch (error: any) {
-            logger.error(`Error getting expected params for connection: ${app.toUpperCase()}: ${error}`);
+            logger.error(`${error}`);
             return connectionMessage({
                 success: false,
                 data: error,

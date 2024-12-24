@@ -34,7 +34,7 @@ if (iDetails.success) {
     // Initiate the integration
     await toolkit.initiateAppConnection({
         app: App.REDDIT,
-        type: AuthType.PASSWORD_BASED_AUTH,
+        type: AuthType.API_KEY,
         authData: params,
     })
 }
