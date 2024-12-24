@@ -17,7 +17,7 @@ const earnGrantsListings = async (inputParams: { userRegion?: string[] | null; }
       data: response,
     });
   } catch (error) {
-    logger.error(`Error fetching grants:`, error);
+    logger.error(`Error fetching grants: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching grants.`,

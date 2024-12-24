@@ -20,7 +20,7 @@ const earnFetchUserPoWs = async (inputParams: { userId: string; }): Promise<stri
       data: response,
     });
   } catch (error) {
-    logger.error(`Error fetching PoWs of user:`, error);
+    logger.error(`Error fetching PoWs of user: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching PoWs.`,

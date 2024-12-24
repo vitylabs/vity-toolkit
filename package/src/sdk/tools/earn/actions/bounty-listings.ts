@@ -22,7 +22,7 @@ const earnBountyListings = async (inputParams: {
       data: response,
     });
   } catch (error) {
-    logger.error(`Error fetching listings:`, error);
+    logger.error(`Error fetching listings: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching listings.`,

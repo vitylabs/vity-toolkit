@@ -20,7 +20,7 @@ const earnSearchUsers = async (inputParams: { query: string; takeNum?: number })
       data: response,
     });
   } catch (error) {
-    logger.error(`Error searching for users:`, error);
+    logger.error(`Error searching for users: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while searching for users.`,

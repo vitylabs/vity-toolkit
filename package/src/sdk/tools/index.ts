@@ -59,6 +59,8 @@ import { earnSubmissionDetailsTool } from "./earn/actions/submission-details";
 import { earnTotalUserCountTool } from "./earn/actions/total-user-count";
 import { earnFetchUserPublicStatsTool } from "./earn/actions/user-public-stats";
 import { earnFetchFeedTool } from "./earn/actions/feed";
+import { RedditTool } from "./reddit";
+import { redditFilterTool } from "./reddit/actions/filter";
 
 
 //  A P P S
@@ -66,27 +68,29 @@ import { earnFetchFeedTool } from "./earn/actions/feed";
 export enum App {
     SOLANA_WALLET = 'solana-wallet',
     TWITTER = 'twitter',
-    EARN = 'earn'
+    EARN = 'earn',
+    REDDIT = 'reddit',
 }
 
 export const appsMap = {
     [App.SOLANA_WALLET]: SolanaWalletTool,
     [App.TWITTER]: TwitterTool,
-    [App.EARN]: EarnTool
+    [App.EARN]: EarnTool,
+    [App.REDDIT]: RedditTool,
 }
 
 // Integrable apps
 
 export type IntegrableApps = Extract<
     App,
-    App.TWITTER
+    App.TWITTER | App.REDDIT
 >;
 
 // Connectable apps
 
 export type ConnectableApps = Extract<
     App,
-    App.TWITTER
+    App.TWITTER | App.REDDIT
 >;
 
 
@@ -148,6 +152,8 @@ export enum Action {
     EARN_SUBMISSION_DETAILS,
     EARN_TOTAL_USER_COUNT,
     EARN_FETCH_USER_PUBLIC_STATS,
+
+    REDDIT_FILTER,
 }
 
 export const actionsMap = {
@@ -206,6 +212,8 @@ export const actionsMap = {
     [Action.EARN_SUBMISSION_DETAILS]: earnSubmissionDetailsTool,
     [Action.EARN_TOTAL_USER_COUNT]: earnTotalUserCountTool,
     [Action.EARN_FETCH_USER_PUBLIC_STATS]: earnFetchUserPublicStatsTool,
+
+    [Action.REDDIT_FILTER]: redditFilterTool,
 }
 
 

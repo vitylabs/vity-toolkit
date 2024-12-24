@@ -20,7 +20,7 @@ const earnFetchFeed = async (inputParams: { type: string; id: string; }): Promis
       data: response,
     });
   } catch (error) {
-    logger.error(`Error fetching feed post of type ${type} with ID ${id}:`, error);
+    logger.error(`Error fetching feed post of type ${type} with ID ${id}: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching feed post.`,

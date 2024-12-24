@@ -17,7 +17,7 @@ const earnFetchUserPublicStats = async (inputParams: { username: string; }): Pro
       data: response,
     });
   } catch (error) {
-    logger.error(`Error fetching public stats for user ${inputParams.username}:`, error);
+    logger.error(`Error fetching public stats for user ${inputParams.username}: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching public stats.`,

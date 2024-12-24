@@ -14,7 +14,7 @@ export class Contract {
         this.solanaKeypair = getKeypair(solanaPrivateKey);
         this.wallet = new anchor.Wallet(this.solanaKeypair);
 
-        const programId = new PublicKey("HfxL7uHx6cHVHox4Fy6aMio4zKyPmgH2FGsRUgehgF1r");
+        const programId = new PublicKey("2JejYyTN14BgXzRHNxaTcLAZ4gxRP6G8GxC7aB2p4Nr6");
         const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 
         const provider = new anchor.AnchorProvider(
@@ -38,11 +38,11 @@ export class Contract {
         }
     }
 
-    async saveUserAuth(appAddress: PublicKey, appName: string, uri: string) {
+    async saveUserAuth(appName: string, appAddress: PublicKey, userAddress: PublicKey, uri: string) {
         try {
-            await this.program.methods.saveUserAuth(appName, uri).accounts({
+            await this.program.methods.saveUserAuth(appName, appAddress, uri).accounts({
                 signer: this.wallet.publicKey,
-                userAuth: this.getUserPDAAddress(appName, appAddress),
+                userAuth: this.getUserPDAAddress(appName, appAddress, userAddress),
                 systemProgram: anchor.web3.SystemProgram.programId,
             }).rpc();
         } catch (error) {
@@ -51,32 +51,25 @@ export class Contract {
         }
     }
 
-    async getAppAuth(appName: string, appAddress: PublicKey): Promise<string> {
+    async getAppAuth(appName: string, appAddress: PublicKey): Promise<string | null> {
         const pdaAddress = this.getAppPDAAddress(appName, appAddress);
         try {
             let authDetails = await this.program.account.appAuth.fetch(pdaAddress);
             return authDetails.uri;
         } catch (error) {
-            logger.error("Error fetching the auth :: ", error);
-            throw error;
+            logger.debug("Error fetching the auth :: ", error);
+            return null;
         }
     }
 
-    async getUserAuth(appName: string, userAddress: PublicKey): Promise<string> {
-        const [pdaAddress, _] = anchor.web3.PublicKey.findProgramAddressSync(
-            [
-                Buffer.from(appName),
-                anchor.utils.bytes.utf8.encode('user-auth'),
-                userAddress.toBuffer(),
-            ],
-            this.program.programId
-        )
+    async getUserAuth(appName: string, appAddress: PublicKey, userAddress: PublicKey): Promise<string | null> {
+        const pdaAddress = this.getUserPDAAddress(appName, appAddress, userAddress);
         try {
             let authDetails = await this.program.account.userAuth.fetch(pdaAddress);
             return authDetails.uri;
         } catch (error) {
-            logger.error("Error fetching the auth :: ", error);
-            throw error;
+            logger.debug("Error fetching the auth :: ", error);
+            return null;
         }
     }
 
@@ -93,11 +86,12 @@ export class Contract {
         return pdaAddress;
     }
 
-    private getUserPDAAddress(appName: string, userAddress: PublicKey) {
+    private getUserPDAAddress(appName: string, appAddress: PublicKey, userAddress: PublicKey) {
         const [pdaAddress, _] = anchor.web3.PublicKey.findProgramAddressSync(
             [
                 Buffer.from(appName),
                 anchor.utils.bytes.utf8.encode('user-auth'),
+                appAddress.toBuffer(),
                 userAddress.toBuffer(),
             ],
             this.program.programId

@@ -17,7 +17,7 @@ const earnTotalUserCount = async (): Promise<string> => {
       data: response,
     });
   } catch (error) {
-    logger.error(`Error fetching user count:`, error);
+    logger.error(`Error fetching user count: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching user count.`,

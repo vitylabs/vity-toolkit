@@ -19,7 +19,7 @@ const earnSubmissionDetails = async (inputParams: { submissionId: string; }): Pr
       data: response.data,
     });
   } catch (error) {
-    console.error(`Error fetching submission details:`, error);
+    console.error(`Error fetching submission details: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching submission details.`,

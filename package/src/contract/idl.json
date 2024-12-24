@@ -1,100 +1,104 @@
 {
-  "version": "0.1.0",
-  "name": "contract",
-  "instructions": [
-      {
-          "name": "saveAppAuth",
-          "accounts": [
-              {
-                  "name": "signer",
-                  "isMut": true,
-                  "isSigner": true
-              },
-              {
-                  "name": "appAuth",
-                  "isMut": true,
-                  "isSigner": false
-              },
-              {
-                  "name": "systemProgram",
-                  "isMut": false,
-                  "isSigner": false
-              }
-          ],
-          "args": [
-              {
-                  "name": "appName",
-                  "type": "string"
-              },
-              {
-                  "name": "uri",
-                  "type": "string"
-              }
-          ]
-      },
-      {
-          "name": "saveUserAuth",
-          "accounts": [
-              {
-                  "name": "signer",
-                  "isMut": true,
-                  "isSigner": true
-              },
-              {
-                  "name": "userAuth",
-                  "isMut": true,
-                  "isSigner": false
-              },
-              {
-                  "name": "systemProgram",
-                  "isMut": false,
-                  "isSigner": false
-              }
-          ],
-          "args": [
-              {
-                  "name": "appName",
-                  "type": "string"
-              },
-              {
-                  "name": "uri",
-                  "type": "string"
-              }
-          ]
-      }
-  ],
-  "accounts": [
-      {
-          "name": "AppAuth",
-          "type": {
-              "kind": "struct",
-              "fields": [
-                  {
-                      "name": "uri",
-                      "type": "string"
-                  },
-                  {
-                      "name": "bump",
-                      "type": "u8"
-                  }
-              ]
-          }
-      },
-      {
-          "name": "UserAuth",
-          "type": {
-              "kind": "struct",
-              "fields": [
-                  {
-                      "name": "uri",
-                      "type": "string"
-                  },
-                  {
-                      "name": "bump",
-                      "type": "u8"
-                  }
-              ]
-          }
-      }
-  ]
+    "version": "0.1.0",
+    "name": "contract",
+    "instructions": [
+        {
+            "name": "saveAppAuth",
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "appAuth",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": [
+                {
+                    "name": "appName",
+                    "type": "string"
+                },
+                {
+                    "name": "uri",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "saveUserAuth",
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "userAuth",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": [
+                {
+                    "name": "appName",
+                    "type": "string"
+                },
+                {
+                    "name": "appId",
+                    "type": "publicKey"
+                },
+                {
+                    "name": "uri",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "accounts": [
+        {
+            "name": "AppAuth",
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "uri",
+                        "type": "string"
+                    },
+                    {
+                        "name": "bump",
+                        "type": "u8"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "UserAuth",
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "uri",
+                        "type": "string"
+                    },
+                    {
+                        "name": "bump",
+                        "type": "u8"
+                    }
+                ]
+            }
+        }
+    ]
 }

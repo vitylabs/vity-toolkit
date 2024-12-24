@@ -19,7 +19,7 @@ const earnFetchExclusiveSponsorGrants = async (inputParams: { sponsor: string; }
       data: response,
     });
   } catch (error) {
-    logger.error(`Error fetching sponsor grants:`, error);
+    logger.error(`Error fetching sponsor grants: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching sponsor grants.`,

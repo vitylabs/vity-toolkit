@@ -20,7 +20,7 @@ const earnFetchGrantDetails = async (inputParams: { slug: string; }): Promise<st
       data: response,
     });
   } catch (error) {
-    logger.error(`Error fetching grant details:`, error);
+    logger.error(`Error fetching grant details: ${error}`);
     return toolMessage({
       success: false,
       data: `Error occurred while fetching grant details.`,

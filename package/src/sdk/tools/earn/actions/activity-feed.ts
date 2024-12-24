@@ -33,7 +33,7 @@ const earnActivityFeed = async (inputParams: {
             data: response,
         });
     } catch (error) {
-        logger.error(`Error getting feed:`, error);
+        logger.error(`Error getting feed: ${error}`);
         return toolMessage({
             success: false,
             data: `

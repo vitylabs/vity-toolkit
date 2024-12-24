@@ -48,7 +48,6 @@ import {
 export class TwitterTool {
     private appPrivateKey: string | undefined;
     private userPrivateKey: string | undefined;
-    private userType: "developer" | "user" = "developer";
     private appLit: Lit | undefined;
     private userLit: Lit | undefined;
     client: TwitterApi;
@@ -63,15 +62,17 @@ export class TwitterTool {
         this.appPrivateKey = VityToolKitSDKContext.appPrivateKey;
         this.userPrivateKey = VityToolKitSDKContext.userPrivateKey;
 
-        if (this.appPrivateKey) { // App Private key isn't always neccessary 
+        if (this.appPrivateKey) { // App Private key isn't neccessary 
             this.appLit = new Lit(this.appPrivateKey);
-        } else {
-            this.userType = "user";
         }
 
         if (!this.userPrivateKey) { // @TODO: User private key isn't require (for now)
             // throw new Error("User private key is required to use this tool");
         } else {
+            if (!this.appPrivateKey) { // For individual users, they are the owner/maker of the app
+                this.appPrivateKey = this.userPrivateKey;
+            }
+
             this.userLit = new Lit(this.userPrivateKey);
         }
 
@@ -131,35 +132,26 @@ export class TwitterTool {
         ]
     }
 
-    getExpectedParamsForIntegration(type?: AuthType) {
+    static getExpectedParamsForIntegration(type?: AuthType) {
         return {
             "APP_KEY": "",
             "APP_SECRET": ""
         }
     }
 
-    getExpectedParamsForConnection(type: AuthType) {
+    static getExpectedParamsForConnection(type: AuthType) {
         switch (type) {
             case AuthType.OAUTH_1:
-                return connectionMessage({
-                    success: false,
-                    message: "Currently, we do not support OAuth for Twitter"
-                });
+                throw new Error("Currently, we do not support OAuth 1 for Twitter");
             case AuthType.OAUTH_2:
-                return connectionMessage({
-                    success: false,
-                    message: "Currently, we do not support OAuth for Twitter"
-                });
+                throw new Error("Currently, we do not support OAuth 2 for Twitter");
             case AuthType.API_KEY:
                 return {
                     "ACCESS_TOKEN": "",
                     "ACCESS_SECRET": ""
                 }
             case AuthType.PASSWORD_BASED_AUTH:
-                return connectionMessage({
-                    success: false,
-                    message: "Currently, we do not support Password Based Auth for Twitter"
-                });
+                throw new Error("Currently, we do not support Password Based Auth for Twitter");
         }
     }
 
@@ -169,17 +161,6 @@ export class TwitterTool {
 
     // async getConnection() {
     //     return null;
-    // }
-
-    // async appIntegration(authData: object) { // for the developer/company
-    //     return integrationMessage({
-    //         success: false,
-    //         message: "Currently, we do not support integration for Twitter"
-    //     });
-    // }
-
-    // async initiateAppConnection(authData: object) { // for the user
-        
     // }
 
 }
