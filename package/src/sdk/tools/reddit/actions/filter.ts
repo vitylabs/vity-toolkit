@@ -13,6 +13,7 @@ const redditFilter = async (inputParams: { subreddit: string, query: string[], l
             throw new Error("Reddit client is not initialized");
         }
         
+        // logic to filter the posts
         const searchTweets = await redditClient.search({
             subreddit: inputParams.subreddit,
             query: inputParams.query.join(" "),

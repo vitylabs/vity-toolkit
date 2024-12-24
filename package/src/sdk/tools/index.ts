@@ -61,6 +61,9 @@ import { earnFetchUserPublicStatsTool } from "./earn/actions/user-public-stats";
 import { earnFetchFeedTool } from "./earn/actions/feed";
 import { RedditTool } from "./reddit";
 import { redditFilterTool } from "./reddit/actions/filter";
+import { redditCommentTool } from "./reddit/actions/comment";
+import { redditCreatePostTool } from "./reddit/actions/create-post";
+import { redditDeletePostTool } from "./reddit/actions/delete-post";
 
 
 //  A P P S
@@ -154,6 +157,9 @@ export enum Action {
     EARN_FETCH_USER_PUBLIC_STATS,
 
     REDDIT_FILTER,
+    REDDIT_COMMENT,
+    REDDIT_CREATE_POST,
+    REDDIT_DELETE_POST,
 }
 
 export const actionsMap = {
@@ -214,6 +220,9 @@ export const actionsMap = {
     [Action.EARN_FETCH_USER_PUBLIC_STATS]: earnFetchUserPublicStatsTool,
 
     [Action.REDDIT_FILTER]: redditFilterTool,
+    [Action.REDDIT_COMMENT]: redditCommentTool,
+    [Action.REDDIT_CREATE_POST]: redditCreatePostTool,
+    [Action.REDDIT_DELETE_POST]: redditDeletePostTool,
 }
 
 

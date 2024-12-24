@@ -27,4 +27,11 @@ export function connectionMessage(options: IConnectionMessage) {
     return options;
 }
 
+// For unpromising the promise
+// This is used to remove the then, catch, finally methods from the promise object
+export const unPromise = async <T>(promise: Promise<T>) => {
+    const result = await promise;
+    return result as Omit<T, 'then' | 'catch' | 'finally'>;
+};
+
 

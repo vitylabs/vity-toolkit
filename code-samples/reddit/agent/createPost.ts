@@ -11,7 +11,7 @@ const toolKit = new LangchainToolkit({
     userPrivateKey: "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv"
 });
 
-const tools = toolKit.getTools({ actions: [Action.REDDIT_COMMENT, Action.REDDIT_FILTER] });
+const tools = toolKit.getTools({ actions: [Action.REDDIT_CREATE_POST] });
 const prompt = ChatPromptTemplate.fromMessages([
     ["system", `You are an AI agent responsible for taking actions on Reddit on users' behalf. 
         You need to take action on Reddit using Reddit APIs. Use correct tools to run APIs from the given tool-set.`],
@@ -29,4 +29,4 @@ const agentExecutor = new AgentExecutor({
     verbose: true,
 });
 
-console.log(await agentExecutor.invoke({ input: "Fetch newest 1 post from solana on pump.fun and comment `GM` on that post." }));
+console.log(await agentExecutor.invoke({ input: "Create a new post in the LearnPython subreddit with title `Is learning python worth it in 2025?` and post text as `I am a bit scared with the evolution of AI agents. What do you think?`. Give me the post Id." }));
