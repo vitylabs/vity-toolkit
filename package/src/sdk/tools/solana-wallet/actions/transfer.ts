@@ -21,7 +21,7 @@ const solanaWalletTransfer = async (inputParams: { to: string, amount: number, t
             return toolMessage({
                 success: false,
                 data: {
-                    error: "No private key found. Pass the private key in the VityToolKit constructor.",
+                    error: "No user private key found. Pass the user private key in the VityToolKit constructor.",
                 },
             });
         }

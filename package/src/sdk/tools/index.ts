@@ -64,6 +64,10 @@ import { redditFilterTool } from "./reddit/actions/filter";
 import { redditCommentTool } from "./reddit/actions/comment";
 import { redditCreatePostTool } from "./reddit/actions/create-post";
 import { redditDeletePostTool } from "./reddit/actions/delete-post";
+import { GibworkTool } from "./gibwork";
+import { gibworkExploreTool } from "./gibwork/actions/explore";
+import { gibworkTasksTool } from "./gibwork/actions/tasks";
+import { gibworkCreateTaskTool } from "./gibwork/actions/create-task";
 
 
 //  A P P S
@@ -73,6 +77,7 @@ export enum App {
     TWITTER = 'twitter',
     EARN = 'earn',
     REDDIT = 'reddit',
+    GIBWORK = 'gibwork',
 }
 
 export const appsMap = {
@@ -80,6 +85,7 @@ export const appsMap = {
     [App.TWITTER]: TwitterTool,
     [App.EARN]: EarnTool,
     [App.REDDIT]: RedditTool,
+    [App.GIBWORK]: GibworkTool,
 }
 
 // Integrable apps
@@ -160,6 +166,10 @@ export enum Action {
     REDDIT_COMMENT,
     REDDIT_CREATE_POST,
     REDDIT_DELETE_POST,
+
+    GIBWORK_EXPLORE,
+    GIBWORK_TASKS,
+    GIBWORK_CREATE_TASK,
 }
 
 export const actionsMap = {
@@ -223,6 +233,10 @@ export const actionsMap = {
     [Action.REDDIT_COMMENT]: redditCommentTool,
     [Action.REDDIT_CREATE_POST]: redditCreatePostTool,
     [Action.REDDIT_DELETE_POST]: redditDeletePostTool,
+
+    [Action.GIBWORK_EXPLORE]: gibworkExploreTool,
+    [Action.GIBWORK_TASKS]: gibworkTasksTool,
+    [Action.GIBWORK_CREATE_TASK]: gibworkCreateTaskTool,
 }
 
 
