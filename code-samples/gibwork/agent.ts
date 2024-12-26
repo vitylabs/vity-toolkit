@@ -12,8 +12,8 @@ const toolKit = new LangchainToolkit({
 
 const tools = toolKit.getTools({ apps: [App.GIBWORK] });
 const prompt = ChatPromptTemplate.fromMessages([
-    ["system", `You are an AI agent responsible for taking actions on Reddit on users' behalf. 
-        You need to take action on Reddit using Reddit APIs. Use correct tools to run APIs from the given tool-set.`],
+    ["system", `You are an AI agent responsible for taking actions on Gibwork on users' behalf. 
+        You need to take action on Gibwork using Gibwork APIs. Use correct tools to run APIs from the given tool-set.`],
     ["placeholder", "{chat_history}"],
     ["human", "{input}"],
     ["placeholder", "{agent_scratchpad}"],
@@ -28,4 +28,6 @@ const agentExecutor = new AgentExecutor({
     verbose: true,
 });
 
-console.log(await agentExecutor.invoke({ input: "Create a Gibwork task: Follow my Twitter account @thatsmeadarsh if you have 50+ followers. My total budget is 11 USDC. Submit a screenshot showing you’ve followed, along with your Twitter profile link, to qualify for the reward. The mint address for USDC is EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }));
+const response = await agentExecutor.invoke({ input: "Create a Gibwork task: Follow my Twitter account @thatsmeadarsh if you have 50+ followers. My total budget is 11 USDC. Submit a screenshot showing you’ve followed, along with your Twitter profile link, to qualify for the reward. The mint address for USDC is EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" });
+
+console.log(response);

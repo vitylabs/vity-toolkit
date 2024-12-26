@@ -29,4 +29,5 @@ const agentExecutor = new AgentExecutor({
     verbose: true,
 });
 
-console.log(await agentExecutor.invoke({ input: "Fetch newest 1 post from solana on pump.fun and comment `GM` on that post." }));
+const response = await agentExecutor.invoke({ input: "Fetch newest 1 post from solana on pump.fun and comment `GM` on that post." });
+console.log(response);
