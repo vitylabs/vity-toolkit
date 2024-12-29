@@ -1,6 +1,6 @@
 {
   "name": "vity-toolkit",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A powerful tool library for LLMs & AI agents",
   "type": "module",
   "main": "./src/index.ts",
