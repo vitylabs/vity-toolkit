@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "@ai-sdk/openai": "^1.0.11",
     "@langchain/core": "",
     "@langchain/openai": "",
+    "ai": "^4.0.22",
     "dotenv": "^16.4.7",
     "langchain": "",
     "openai": "^4.50.0"

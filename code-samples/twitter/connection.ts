@@ -2,8 +2,8 @@ import { VityToolKit } from "vity-toolkit";
 
 
 const toolkit = new VityToolKit({
-    userPrivateKey: "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv",
-    appPrivateKey: "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv"
+    userPrivateKey: process.env.DEMO_SOLANA_PRIVATE_KEY,
+    appPrivateKey: process.env.DEMO_SOLANA_PRIVATE_KEY
 });
 
 // const params = toolkit.getExpectedParamsForConnection({

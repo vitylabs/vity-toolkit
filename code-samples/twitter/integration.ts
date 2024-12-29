@@ -1,7 +1,7 @@
 import { App, LangchainToolkit } from 'vity-toolkit';
 
 const toolkit = new LangchainToolkit({
-    appPrivateKey: "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv"
+    appPrivateKey: process.env.DEMO_SOLANA_PRIVATE_KEY
 });
 
 // 1. First get the expected params for the integration

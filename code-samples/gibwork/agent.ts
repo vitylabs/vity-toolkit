@@ -7,7 +7,7 @@ import { AgentExecutor } from "langchain/agents";
 
 const model = new ChatOpenAI({ model: "gpt-4o" });
 const toolKit = new LangchainToolkit({
-    userPrivateKey: "3C82AFmHn64h2gYGQbPHFrQB9bJzT5hfSGXuTwpf9RCX59yvusZd5DhVMmq9AYbgRNooGqdY2D2oJqvPAX8CLnGv"
+    userPrivateKey: process.env.DEMO_SOLANA_PRIVATE_KEY
 });
 
 const tools = toolKit.getTools({ apps: [App.GIBWORK] });
