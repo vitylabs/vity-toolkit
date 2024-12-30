@@ -2,16 +2,14 @@
 
 <p align="center">A framework to integrate AI agents and LLMs with Web2 and Web3 tools, ensuring secure and seamless authentication and reliability. Inspired from <a href="https://composio.dev/">composio</a></p>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#-demo">Demo</a></li>
-    <li><a href="#-features">Features</a></li>
-    <li><a href="#-quick-start">Quick Start</a></li>
-    <li><a href="#-contributing">Contributing</a></li>
-  </ol>
-</details>
+<div align="center">
+  
+![NPM Downloads](https://img.shields.io/npm/dm/vity-toolkit?style=for-the-badge)
+![NPM Version](https://img.shields.io/npm/v/vity-toolkit?style=for-the-badge)
+![NPM Last Update](https://img.shields.io/npm/last-update/vity-toolkit?style=for-the-badge)
+![NPM Type Definition](https://img.shields.io/npm/types/vity-toolkit?style=for-the-badge)
+
+</div>
 
 ## 🎥 DEMO
 [![demo video](https://github.com/user-attachments/assets/14c2b876-dc7b-4d21-8997-dc833dfdf41d)](https://drive.google.com/file/d/1S3mY4NzMSi-NH8pqEK-qrDL1WYWhFSYN/view)
