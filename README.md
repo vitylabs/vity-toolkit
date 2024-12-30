@@ -14,7 +14,7 @@
 </details>
 
 ## 🎥 DEMO
-[![demo video](https://drive.google.com/file/d/1S3mY4NzMSi-NH8pqEK-qrDL1WYWhFSYN/view)](https://drive.google.com/file/d/1S3mY4NzMSi-NH8pqEK-qrDL1WYWhFSYN/view)
+[![demo video](https://github.com/user-attachments/assets/14c2b876-dc7b-4d21-8997-dc833dfdf41d)](https://drive.google.com/file/d/1S3mY4NzMSi-NH8pqEK-qrDL1WYWhFSYN/view)
 
 ## 📙 Features
 Vity Toolkit is an open-source framework that works with any LLM that supports tool use. It is your gateway to AI integrations:
